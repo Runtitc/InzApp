@@ -21,9 +21,10 @@ public class AlertBox {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            // ... user chose OK
+            SnortInstaller installer = new SnortInstaller("");
+            installer.install();
         } else {
-            //System.exit(0);
+            System.exit(0);
         }
     }
 
