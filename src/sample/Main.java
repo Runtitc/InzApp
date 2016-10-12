@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main extends Application {
 
@@ -30,12 +31,22 @@ public class Main extends Application {
             snortProgram.destroy(); // now we destroy program cuz we will run it afterwards
             startApp(primaryStage);
         } catch (IOException e) {
-            System.out.println("nie ma");
             AlertBox alert = new AlertBox("");
-
+            //sprawdzic czy nie powstaja procesy widmo
         }
     }
     public static void main(String[] args) {
+
+        ExCmd sample = new ExCmd();
+        System.out.println("Podaj haslo: ");
+        //probowalem tutaj przeslac rzeczy do skryptu, ale tak czy siak, potem potrzeujemy modulu EXCEP, a do instalacji tego moduu potrzene jest haslo
+        // Jedyne roziwiazanie jakie widzie na ten moment, to wyslanie prosto hasla do strumienia, gdzie prosza o haslo, a nastepnie przekierowanie polecenia dalej
+        // kazde polecenie linijka po linijce powinno raczej zostac wykonywane komenda po komendzie
+        Scanner reader = new Scanner(System.in);
+        String n = reader.next(); // Scans the next token of the input as an int.
+        System.out.println(n);
+
+        System.out.println(sample.executeCommand("./SnortInstallation.sh", true));
         launch(args);
 
     }
