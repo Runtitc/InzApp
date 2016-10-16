@@ -13,7 +13,12 @@ public class AlertBox {
     private boolean  ifCancel;
     public AlertBox(String type) {
         this.typeOfAlert = type;
+        if (type.equals("noSnortDetected")){
+            noSnortDetectedAlert();
+        }
 
+    }
+    private void noSnortDetectedAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Uwaga!");
         alert.setHeaderText("Nie wykryto zainstalowanego programu Snort");
@@ -26,7 +31,7 @@ public class AlertBox {
             String typeOfOperatingSystem = System.getProperty("os.name");
             if (typeOfOperatingSystem.equals("Linux")) {
                 // install linux
-                installer.installLinux();
+               // installer.installLinux();
             } else if (typeOfOperatingSystem.equals("Windows")) {
                 //install on Windows
             }
