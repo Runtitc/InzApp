@@ -9,22 +9,74 @@ import java.util.Optional;
  * Created by Przemix on 10/9/16.
  */
 public class AlertBox {
+
     private String typeOfAlert;
-    private boolean  ifCancel;
-    public AlertBox(String type) {
+    private String additionalInformation;
+
+    public AlertBox(String type, String additionalInformation) {
         this.typeOfAlert = type;
+        this.additionalInformation = additionalInformation;
+
         if (type.equals("noSnortDetected")){
-            noSnortDetectedAlert();
+            noSnortDetectedAlert(additionalInformation);
         }
-
+        else if(type.equals("noFileFound")){
+            noFileFound(additionalInformation);
+        }
     }
-    private void noSnortDetectedAlert() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Uwaga!");
-        alert.setHeaderText("Nie wykryto zainstalowanego programu Snort");
-        alert.setContentText("Czy zainstalowac program Snort?");
+    public AlertBox(String type){
+        this.typeOfAlert = type;
 
-        Optional<ButtonType> result = alert.showAndWait();
+        if (type.equals("savedWithSuccess")){
+            savedSuccessfully();
+        }
+    }
+
+    private void savedSuccessfully() {
+        String title = "Powodzenie!";
+        String headerText = "Zapis OK";
+        String contentText = "Plik zostal zapisany";
+
+        Alert saveSuccessful = createInformationAlert(title, headerText, contentText);
+    }
+
+    private void noFileFound(String additionalInformation) {
+        String title = "Blad!";
+        String headerText = "Nie znaleziono pliku";
+        String contentText = "Plik " + additionalInformation + " jest niedostepny!";
+
+        Alert noSnortAlert = createInformationAlert(title, headerText, contentText);
+    }
+
+    private Alert createConfirmationAlert(String title, String headerText, String contentText){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        setAlertContent(alert, title, headerText, contentText);
+
+        return alert;
+    }
+    private Alert createInformationAlert(String title, String headerText, String contentText){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        //TODO : alert.setContent instead of setContent(alert)
+        setAlertContent(alert, title, headerText, contentText);
+        alert.showAndWait();
+
+        return alert;
+    }
+    private void setAlertContent(Alert alert, String title, String headerText, String contentText){
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+    }
+    private void noSnortDetectedAlert(String additionalInformation) {
+        String title = "Uwaga";
+        String headerText = "Nie wykryto zainstalowanego programu Snort";
+        String contentText = "Czy zainstalowac program Snort?";
+
+        Alert noSnortAlert = createConfirmationAlert(title, headerText, contentText);
+
+        Optional<ButtonType> result = noSnortAlert.showAndWait();
+
         if (result.get() == ButtonType.OK) {
             SnortInstaller installer = new SnortInstaller("");
             // check the type of OS
@@ -35,9 +87,9 @@ public class AlertBox {
             } else if (typeOfOperatingSystem.equals("Windows")) {
                 //install on Windows
             }
-        } else{
+        }
+        else{
             System.exit(0);
         }
-
     }
 }
