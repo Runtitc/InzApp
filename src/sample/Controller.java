@@ -26,10 +26,6 @@ public class Controller{
         if (id.equals(registerButton)){ switchScene(event, "view/signup.fxml"); }
         if (id.equals(registerCancel)){ switchScene(event, "view/signin.fxml"); }
         if (id.equals(guestLogin)){ switchScene(event, "view/mainWindow.fxml"); }
-
-
-
-
     }
 
     public void switchScene(ActionEvent event, String fxmlResource) throws IOException {
