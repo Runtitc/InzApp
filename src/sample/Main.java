@@ -4,39 +4,28 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        checkSnortInstalled(primaryStage);
+        checkSnortRunning(primaryStage);
 
     }
     public void startApp(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view/signin.fxml"));
-        primaryStage.getIcons().add(new Image("file:images/icon.png"));
-        primaryStage.setTitle("Welcome");
+        primaryStage.setTitle("Snort Log Manager");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-    public void checkSnortInstalled(Stage primaryStage) throws Exception {
+    public void checkSnortRunning(Stage primaryStage) throws Exception {
+        //Here we need to check whether Snort is running as a daemon.
+        // To do tis we can use a bash command PGREP and see whether the process is already running.
         String appName = "snort";
 
         startApp(primaryStage);
-        /*try {
-            Process snortProgram = Runtime.getRuntime().exec(appName);
-            snortProgram.destroy(); // now we destroy program cuz we will run it afterwards
-            startApp(primaryStage);
-        } catch (IOException e) {
-            AlertBox alert = new AlertBox("");
-            //sprawdzic czy nie powstaja procesy widmo
-        }*/
     }
     public static void main(String[] args) {
 

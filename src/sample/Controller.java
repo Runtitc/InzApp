@@ -1,25 +1,26 @@
 package sample;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class Controller{
 
-    private String registerButton = "registerButton";
-    private String registerCancel = "registerCancel";
+    private String registerButton = "registerButton"; //inactive
+    private String registerCancel = "registerCancel"; //inactive
     private String guestLogin = "guestLogInButton";
+
+
 
     public void onEventOccured(ActionEvent event) throws IOException {
 
-        Button button = (Button) event.getSource();
+        Button button = (Button) event.getSource(); //kontroler szuka zrodla zdarzenia
         String id = button.getId();
 
         if (id.equals(registerButton)){ switchScene(event, "view/signup.fxml"); }
@@ -29,6 +30,8 @@ public class Controller{
 
     public void switchScene(ActionEvent event, String fxmlResource) throws IOException {
 
+        //funkcja do przechodzenia pomiedzy okienkami, najpierw ladowane sa do zmiennej resterPage obecna strona fxml
+
         Parent registerPage = FXMLLoader.load(getClass().getResource(fxmlResource));
         Scene registerScene = new Scene(registerPage);
 
@@ -36,5 +39,6 @@ public class Controller{
 
         primaryStageRegister.setScene(registerScene);
         primaryStageRegister.show();
+
     }
 }

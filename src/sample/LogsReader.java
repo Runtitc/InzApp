@@ -3,17 +3,14 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.TextArea;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -30,18 +27,32 @@ public class LogsReader {
     private String logsPath = "/home/gabrysia/a.txt";
     private String logsContent = "";
 
-    public void buttonClicked(ActionEvent event){
+    public void onEventOccured(ActionEvent event){
 
-        Button button = (Button) event.getSource();
-        String buttonId = button.getId();
+        if (event.getSource() instanceof Button) {
+            //Button
 
-        if (buttonId.equals("showLogsButton")){
-            displayLogs();
+            Button button = (Button) event.getSource();
+            String buttonId = button.getId();
+
+            if (buttonId.equals("showLogsButton")) {
+                displayLogs();
+            } else if (buttonId.equals("saveLogsButton")) {
+                Stage primaryStage = getStage(event);
+                saveLogsToFile(chooseFile(primaryStage));
+            }
+        }else if(event.getSource() instanceof MenuItem){
+            //Menu Item
+
+            MenuItem menuItem = (MenuItem) event.getSource();
+            String menuItemId = menuItem.getId();
+
+            if(menuItemId.equals("buttonProgramTermination")){
+                System.out.println("Do widzenia!");
+                System.exit(0);
+            }
         }
-        else if (buttonId.equals("saveLogsButton")) {
-            Stage primaryStage = getStage(event);
-            saveLogsToFile(chooseFile(primaryStage));
-        }
+        System.out.println(event.getSource());
     }
     public void saveLogsToFile(File file){
 
@@ -87,5 +98,15 @@ public class LogsReader {
             logsContent += text + "\n";
         }
         logsPlace.setText(logsContent);
+    }
+
+    public void menuBarOneventOccured(ActionEvent event) throws IOException{
+        //Platform.exit();
+        //MenuItem fileTermination = (MenuItem) event.getSource();
+        //String id = fileTermination.getId();
+
+        //if (id.equals(buttonFileTermination)) {}
+
+
     }
 }
