@@ -1,10 +1,14 @@
 package sample;
 
+import database.config.CreateConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
@@ -39,6 +43,27 @@ public class Main extends Application {
         System.out.println(n);
 
         System.out.println(sample.executeCommand("./snortInstall.sh", true));*/
+
+        Connection conn = null;
+
+        try{
+            conn = CreateConnection.getConn();
+
+            if (conn != null){
+                System.out.println("Connection established!");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         launch(args);
 
     }
