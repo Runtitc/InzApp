@@ -33,7 +33,7 @@ public class User {
         return username;
     }
 
-    private String getPassword() {
+    public String getPassword() {
         return password;
     }
 

@@ -20,10 +20,15 @@ public class AlertBox {
         if (type.equals("noSnortDetected")){
             noSnortDetectedAlert(additionalInformation);
         }
-        else if(type.equals("noFileFound")){
+        else if (type.equals("noFileFound")){
             noFileFound(additionalInformation);
+        } else if (type.equals("registrationErr")){
+            registrationError(additionalInformation);
+        } else if (type.equals("registrationSucc")){
+            registrationSucc(additionalInformation);
         }
     }
+
     public AlertBox(String type){
         this.typeOfAlert = type;
 
@@ -46,6 +51,22 @@ public class AlertBox {
         String contentText = "Plik " + additionalInformation + " jest niedostepny!";
 
         Alert noSnortAlert = createInformationAlert(title, headerText, contentText);
+    }
+
+    private void registrationError(String additionalInformation){
+        String title = "Blad!";
+        String headerText = "Niepoprawne wypelnienie formularza.";
+        String contentText = additionalInformation;
+
+        Alert RegErrAlert = createInformationAlert(title, headerText, contentText);
+    }
+
+    private void registrationSucc(String additionalInformation){
+        String title = "Rejestracja zakonczona";
+        String headerText = "Konto zostalo zalozone pomyslnie.";
+        String contentText = additionalInformation;
+
+        Alert RegErrAlert = createInformationAlert(title, headerText, contentText);
     }
 
     private Alert createConfirmationAlert(String title, String headerText, String contentText){

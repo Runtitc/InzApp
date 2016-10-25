@@ -1,7 +1,5 @@
 package sample.controller;
 
-import database.daoimpl.UserDaoImpl;
-import database.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,32 +12,13 @@ import java.io.IOException;
 
 public class Controller{
 
-    private String registerButton = "registerButton";
-    private String registerCancel = "registerCancel";
-    private String guestLogin = "guestLogInButton";
+    public String id;
 
-    private String registerInputButton = "registerInputButton";
-    private String registerLoginInput = "registerLoginInput";
-    private String registerPassInput = "registerPassInput";
-    private String registerPassRepeatInput = "registerPassRepeatInput";
     public void onEventOccured(ActionEvent event) throws IOException {
 
         Button button = (Button) event.getSource(); //kontroler szuka zrodla zdarzenia
-        String id = button.getId();
+        id = button.getId();
 
-        if (id.equals(registerButton)){ switchScene(event, "../view/signup.fxml"); }
-        if (id.equals(registerCancel)){ switchScene(event, "../view/signin.fxml"); }
-        if (id.equals(guestLogin)){ switchScene(event, "../view/mainWindow.fxml"); }
-
-        //i the password is correct, then create the new entry in database
-        if (id.equals(registerInputButton)) {
-            if (checkPassword(registerPassInput, registerPassRepeatInput)) {
-                UserDaoImpl user = new UserDaoImpl()
-                user.createUser(new User(registerLoginInput, registerPassInput));
-            }else {
-                System.out.println("Password Incorrect");
-            }
-        }
     }
 
     public void switchScene(ActionEvent event, String fxmlResource) throws IOException {
@@ -56,11 +35,5 @@ public class Controller{
 
     }
 
-    public boolean checkPassword(String pass1, String pass2){
-        if (pass1 == pass2){
-            return true;
-        }else{
-            return false;
-        }
-    }
+
 }
