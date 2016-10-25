@@ -26,6 +26,8 @@ public class AlertBox {
             registrationError(additionalInformation);
         } else if (type.equals("registrationSucc")){
             registrationSucc(additionalInformation);
+        } else if (type.equals(("loginErr"))){
+            loginErr(additionalInformation);
         }
     }
 
@@ -67,6 +69,14 @@ public class AlertBox {
         String contentText = additionalInformation;
 
         Alert RegErrAlert = createInformationAlert(title, headerText, contentText);
+    }
+
+    private void loginErr(String additionalInformation){
+        String title = "Blad!";
+        String headerText = "Niepoprawne dane logowania";
+        String contentText = additionalInformation;
+
+        Alert logErrAlert = createInformationAlert(title, headerText, contentText);
     }
 
     private Alert createConfirmationAlert(String title, String headerText, String contentText){

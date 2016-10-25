@@ -38,7 +38,7 @@ public class SignUpController extends Controller{
                 UserDaoImpl user = new UserDaoImpl();
                 user.createUser(new User(registerLoginInput.getText(), registerPassInput.getText()));
                 AlertBox alert = new AlertBox("registrationSucc", "Mozesz teraz zalogowac sie do aplikacji.");
-
+                switchScene(event, "../view/signin.fxml");
             }
         }
         if (id.equals(registerCancel)){ switchScene(event, "../view/signin.fxml"); }

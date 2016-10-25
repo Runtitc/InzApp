@@ -7,5 +7,5 @@ import database.user.User;
  */
 public interface UserDao {
     void createUser(User user);
-    User selectByID(int id);
+    User selectByUsername(String username);
 }

@@ -6,6 +6,7 @@ import database.user.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -46,7 +47,52 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User selectByID(int id) {
-        return null;
+    public User selectByUsername(String username)
+    {
+        User user = new User();
+        Connection conn = null;
+        PreparedStatement q = null;
+        ResultSet resultSet = null;
+
+        try{
+            conn = CreateConnection.getConn();
+            q = conn.prepareStatement("SELECT * FROM users WHERE Username = ?");
+            q.setString(1, username);
+
+            resultSet = q.executeQuery();
+
+            while (resultSet.next()){
+                //user.setId(resultSet.getInt("id"));
+                user.setUsername(resultSet.getString("Username"));
+                user.setPassword(resultSet.getString("Password"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if ( null != resultSet ){
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != q ){
+                try {
+                    q.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != conn){
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return user;
     }
 }
