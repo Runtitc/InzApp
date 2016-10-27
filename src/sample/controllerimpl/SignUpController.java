@@ -28,7 +28,7 @@ public class SignUpController extends Controller{
 
         //if the password and login are correct, then create the new entry in database
         if (id.equals(registerInputButton.getId())) {
-            if ( loginInputValidation(registerLoginInput.getText()) ){
+            if (!loginInputValidation(registerLoginInput.getText()) ){
 
             }
             else if (!checkPasswordEqual(registerPassInput.getText(), registerPassRepeatInput.getText())) {
@@ -36,8 +36,6 @@ public class SignUpController extends Controller{
             }
             else if (!checkPasswordLength(registerPassInput.getText())) {
                 AlertBox alert = new AlertBox("registrationErr", "Podane haslo musi byc dluzsze niz 8 znakow.");
-            }
-            else if (checkIfTheUsernameAlreadyExists(registerLoginInput.getText())){
             }
             else
             {
@@ -53,33 +51,64 @@ public class SignUpController extends Controller{
 
     public boolean loginInputValidation(String username){
 
+        if (checkUsernameLength(username)){
+            AlertBox alert = new AlertBox("registrationErr", "Nazwa uzytkownika powinna miec <40 znakow");
+            return false;
+        }
+
         if (checkIfTheUsernameHasForbiddenCharacters(username)){
             //implement whitelist
-            AlertBox alert = new AlertBox("registrationErr", "Podany uzytkownik juz istnieje");
-
+            AlertBox alert = new AlertBox("registrationErr", "Dozwolone znaki: [a-zA-Z1-9]");
+            return false;
         }
 
         if (checkIfTheUsernameAlreadyExists(username)){
             AlertBox alert = new AlertBox("registrationErr", "Podany uzytkownik juz istnieje");
+            return false;
         }
-
         return true;
     }
 
-    public boolean checkIfTheUsernameHasForbiddenCharacters(String username){
-        // TO JEST ZLE ZROBIONE, TRZEA ZROBICTAK, ZE PODZIELE SPLITEM USERNAME, A NASTEPNIE JELIK OTRYS Z TYCH ZNKAOW NIE BEDZIE W TABLICY MATCHES, TO NARA ZWROC FALSE.
-
-
-        Character[] matches = new Character[] {'1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-
-        for (Character s : matches)
-        {
-            if (!username.contains(s.toString()))
-            {
-                return true;
-            }
+    public boolean checkUsernameLength(String username){
+        if (username.length() >= 40){
+            return true;
         }
-        return false;
+        else {
+            return false;
+        }
+    }
+
+    public boolean checkIfTheUsernameHasForbiddenCharacters(String username){
+
+        String[] usernameSplitted = username.split("");
+
+        for (int i=0; i<username.length(); i++ ) {
+            boolean checkIfExists = false;
+            for (int j = 48; j <= 57; j++) {
+                if (usernameSplitted[i].equals(Character.toString((char) j))) {
+                    checkIfExists = true;
+                    break;
+                }
+            }
+            if (!checkIfExists){
+                for (int j = 65; j <= 90; j++) {
+                    if (usernameSplitted[i].equals(Character.toString((char) j))) {
+                        checkIfExists = true;
+                        break;
+                    }
+                }
+            }
+            if (!checkIfExists) {
+                for (int j = 97; j <= 122; j++) {
+                    if (usernameSplitted[i].equals(Character.toString((char) j))) {
+                        checkIfExists = true;
+                        break;
+                    }
+                }
+            }
+            if (checkIfExists) return false;
+        }
+        return true;
    }
 
     public boolean checkIfTheUsernameAlreadyExists(String username){

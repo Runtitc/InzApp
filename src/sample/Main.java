@@ -46,7 +46,7 @@ public class Main extends Application {
         String abc="asd";
 
         System.out.print(abc.split("").length);
-
+        //System.out.print(Character.toString((char) 62));
         launch(args);
 
     }
