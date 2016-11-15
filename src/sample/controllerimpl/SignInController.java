@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class SignInController extends Controller{
     @FXML private Button registerButton;
-    @FXML private Button guestLogInButton;
+    @FXML private Button guestLogInButton; //IMPORTANT
     @FXML private Button loginButton;
 
     //input data

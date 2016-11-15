@@ -14,7 +14,7 @@ public class CreateConnection {
             Class.forName("com.mysql.jdbc.Driver").newInstance(); //get the instance of the class as calling new com.mysql.jdbc.Driver
 
             //Making connection
-            newConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "gabrysia");
+            newConnection = DriverManager.getConnection("jdbc:mysql://192.168.180.128:3306/snort", "snort", "snortpass");
         }catch (Exception e){
             e.printStackTrace();
         }

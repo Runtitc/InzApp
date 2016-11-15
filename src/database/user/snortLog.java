@@ -13,12 +13,15 @@ public class snortLog {
 
     private SimpleStringProperty mainWindowColumnMsgp;
 
+    public snortLog() {
+
+    }
+
     public snortLog(
             String cid,
             String srcAddr,
             String destAddr,
-            String timestamp,
-            String Msg) {
+            String timestamp) {
 
 
         this.mainWindowColumnCid = new SimpleStringProperty(cid);
