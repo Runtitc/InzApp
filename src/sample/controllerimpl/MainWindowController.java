@@ -23,10 +23,10 @@ public class MainWindowController{
 
     @FXML TableView<snortLog> mainWindowTable;
 
-    @FXML private TableColumn mainWindowColumnCid;
-    @FXML private TableColumn mainWindowColumnSrcAddr;
-    @FXML private TableColumn mainWindowColumnDestAddr;
-    @FXML private TableColumn mainWindowColumnTimestamp;
+    @FXML private TableColumn<snortLog, String> mainWindowColumnCid;
+    @FXML private TableColumn<snortLog, String> mainWindowColumnSrcAddr;
+    @FXML private TableColumn<snortLog, String> mainWindowColumnDestAddr;
+    @FXML private TableColumn<snortLog, String> mainWindowColumnTimestamp;
     private ObservableList<snortLog> snortLogs = FXCollections.observableArrayList();
 
     @FXML private MenuItem buttonProgramTermination;
@@ -39,12 +39,12 @@ public class MainWindowController{
 
         SnortLogDaoImpl Logs = new SnortLogDaoImpl();
         snortLogs = Logs.selectLogsByUsername(temporaryUser);
-        System.out.println(snortLogs);
+        //System.out.println(snortLogs);
 
-        mainWindowColumnCid.setCellValueFactory(new PropertyValueFactory<snortLog, String>("cid"));
-        mainWindowColumnSrcAddr.setCellValueFactory(new PropertyValueFactory<snortLog, String>("ip_src"));
-        mainWindowColumnDestAddr.setCellValueFactory(new PropertyValueFactory<snortLog, String>("ip_dst"));
-        mainWindowColumnTimestamp.setCellValueFactory(new PropertyValueFactory<snortLog, String>("timestamp"));
+        mainWindowColumnCid.setCellValueFactory(new PropertyValueFactory<>("mainWindowColumnCid"));
+        mainWindowColumnSrcAddr.setCellValueFactory(new PropertyValueFactory<>("mainWindowColumnSrcAddr"));
+        mainWindowColumnDestAddr.setCellValueFactory(new PropertyValueFactory<>("mainWindowColumnDestAddr"));
+        mainWindowColumnTimestamp.setCellValueFactory(new PropertyValueFactory<>("mainWindowColumnTimestamp"));
         mainWindowTable.getItems().setAll(this.snortLogs);
 
         //refreshLogs();

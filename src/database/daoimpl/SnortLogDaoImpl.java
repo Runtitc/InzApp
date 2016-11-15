@@ -43,7 +43,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
                 snortLog selectedLog = new snortLog(cid, ip_src, ip_dst, timestamp);
                 snortLogsList.add(selectedLog);
             }
-            System.out.println(snortLogsList.get(1));
+            System.out.println(snortLogsList.getClass());
         }catch(Exception e){
             e.printStackTrace();
         }finally {
