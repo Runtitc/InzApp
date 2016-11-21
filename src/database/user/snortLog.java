@@ -1,15 +1,18 @@
 package database.user;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Created by runtitc on 11/8/16.
  */
 public class snortLog {
-    private SimpleStringProperty mainWindowColumnCid;
+    private SimpleIntegerProperty mainWindowColumnCid;
+    private SimpleStringProperty mainWindowColumnSig;
     private SimpleStringProperty mainWindowColumnSrcAddr;
     private SimpleStringProperty mainWindowColumnDestAddr;
-    private SimpleStringProperty mainWindowColumnTimestamp;
+    private SimpleStringProperty mainWindowColumnProt;
+    private SimpleStringProperty mainWindowColumnTime;
 
     private SimpleStringProperty mainWindowColumnMsgp;
 
@@ -18,28 +21,52 @@ public class snortLog {
     }
 
     public snortLog(
-            String cid,
+            Integer cid,
+            String sigName,
             String srcAddr,
             String destAddr,
+            String ipProto,
             String timestamp) {
 
 
-        this.mainWindowColumnCid = new SimpleStringProperty(cid);
+        this.mainWindowColumnCid = new SimpleIntegerProperty(cid);
+        this.mainWindowColumnSig = new SimpleStringProperty(sigName);
         this.mainWindowColumnSrcAddr = new SimpleStringProperty(srcAddr);
         this.mainWindowColumnDestAddr = new SimpleStringProperty(destAddr);
-        this.mainWindowColumnTimestamp = new SimpleStringProperty(timestamp);
+        this.mainWindowColumnProt = new SimpleStringProperty(ipProto);
+        this.mainWindowColumnTime = new SimpleStringProperty(timestamp);
     }
 
-    public String getMainWindowColumnCid() {
+    public int getMainWindowColumnCid() {
         return mainWindowColumnCid.get();
     }
 
-    public SimpleStringProperty mainWindowColumnCidProperty() {
+    public SimpleIntegerProperty mainWindowColumnCidProperty() {
         return mainWindowColumnCid;
     }
 
-    public void setMainWindowColumnCid(String mainWindowColumnCid) {
+    public void setMainWindowColumnCid(int mainWindowColumnCid) {
         this.mainWindowColumnCid.set(mainWindowColumnCid);
+    }
+
+    public String getMainWindowColumnTime() {
+        return mainWindowColumnTime.get();
+    }
+
+    public void setMainWindowColumnTime(String mainWindowColumnTime) {
+        this.mainWindowColumnTime.set(mainWindowColumnTime);
+    }
+
+    public String getMainWindowColumnSig() {
+        return mainWindowColumnSig.get();
+    }
+
+    public SimpleStringProperty mainWindowColumnSigProperty() {
+        return mainWindowColumnSig;
+    }
+
+    public void setMainWindowColumnSig(String mainWindowColumnSig) {
+        this.mainWindowColumnSig.set(mainWindowColumnSig);
     }
 
     public String getMainWindowColumnSrcAddr() {
@@ -66,16 +93,28 @@ public class snortLog {
         this.mainWindowColumnDestAddr.set(mainWindowColumnDestAddr);
     }
 
+    public String getMainWindowColumnProt() {
+        return mainWindowColumnProt.get();
+    }
+
+    public SimpleStringProperty mainWindowColumnProtProperty() {
+        return mainWindowColumnProt;
+    }
+
+    public void setMainWindowColumnProt(String mainWindowColumnProt) {
+        this.mainWindowColumnProt.set(mainWindowColumnProt);
+    }
+
     public String getMainWindowColumnTimestamp() {
-        return mainWindowColumnTimestamp.get();
+        return mainWindowColumnTime.get();
     }
 
-    public SimpleStringProperty mainWindowColumnTimestampProperty() {
-        return mainWindowColumnTimestamp;
+    public SimpleStringProperty mainWindowColumnTimeProperty() {
+        return mainWindowColumnTime;
     }
 
-    public void setMainWindowColumnTimestamp(String mainWindowColumnTimestamp) {
-        this.mainWindowColumnTimestamp.set(mainWindowColumnTimestamp);
+    public void setMainWindowColumnTimestamp(String mainWindowColumnTime) {
+        this.mainWindowColumnTime.set(mainWindowColumnTime);
     }
 
     public String getMainWindowColumnMsgp() {

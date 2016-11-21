@@ -19,10 +19,7 @@ public class AlertBox {
 
         if (type.equals("noSnortDetected")){
             noSnortDetectedAlert(additionalInformation);
-        }
-        else if (type.equals("noFileFound")){
-            noFileFound(additionalInformation);
-        } else if (type.equals("registrationErr")){
+        }else if (type.equals("registrationErr")){
             registrationError(additionalInformation);
         } else if (type.equals("registrationSucc")){
             registrationSucc(additionalInformation);
@@ -36,7 +33,19 @@ public class AlertBox {
 
         if (type.equals("savedWithSuccess")){
             savedSuccessfully();
+        } else if(type.equals("about")){
+            about();
         }
+    }
+
+    private void about() {
+        String title = "O programie";
+        String headerText = "Snort Intelligent Manager";
+        String contentText = "Snort Intelligent Manager 2016\n" +
+                "Programista: Przemysław Brożek\n" +
+                "Praca Inżynierska AGH 2016/2017\n";
+
+        Alert aboutAlert = createInformationAlert(title, headerText, contentText);
     }
 
     private void savedSuccessfully() {
@@ -47,13 +56,6 @@ public class AlertBox {
         Alert saveSuccessful = createInformationAlert(title, headerText, contentText);
     }
 
-    private void noFileFound(String additionalInformation) {
-        String title = "Blad!";
-        String headerText = "Nie znaleziono pliku";
-        String contentText = "Plik " + additionalInformation + " jest niedostepny!";
-
-        Alert noSnortAlert = createInformationAlert(title, headerText, contentText);
-    }
 
     private void registrationError(String additionalInformation){
         String title = "Blad!";

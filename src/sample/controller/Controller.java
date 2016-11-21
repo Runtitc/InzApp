@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuBar;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,5 +36,13 @@ public class Controller{
 
     }
 
+    public void menuSwitchScene(MenuBar bar, String fxmlResource) throws IOException{
+        Parent registerPage = FXMLLoader.load(getClass().getResource(fxmlResource));
+        Scene registerScene = new Scene(registerPage);
 
+        Stage primaryStageRegister = (Stage) bar.getScene().getWindow();
+
+        primaryStageRegister.setScene(registerScene);
+        primaryStageRegister.show();
+    }
 }
