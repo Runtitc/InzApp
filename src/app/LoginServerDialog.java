@@ -29,8 +29,9 @@ public class LoginServerDialog {
         dialog.setGraphic(new ImageView((this.getClass().getResource("../icons/serverKey.png").toString())));
 
         ButtonType loginButtonT = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonT = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        dialog.getDialogPane().getButtonTypes().addAll(loginButtonT, ButtonType.CANCEL);
+        dialog.getDialogPane().getButtonTypes().addAll(loginButtonT, cancelButtonT);
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -48,20 +49,31 @@ public class LoginServerDialog {
         grid.add(passServer, 1, 1);
         dialog.getDialogPane().setContent(grid);
 
+        dialog.setResultConverter(chosenButton -> {
+            if (chosenButton== loginButtonT){
+                return new Pair<>(serverAddress.getText(), passServer.getText());
+            }
+            if (chosenButton == cancelButtonT){
+                System.exit(0);
+            }
+            return null;
+        });
+
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
-
-        if (result.isPresent()) {
-            serverAddr = serverAddress.getText();
-            databasePass = passServer.getText();
-        }
-
+        result.ifPresent(serverData -> {
+            serverAddr = serverData.getKey();
+            databasePass = serverData.getValue();
+        });
     }
 
     public static boolean validate(String serverAddr, String databasePass){
         Connection conn = null;
-
-        conn = CreateConnection.getConn(getServerAddr(),getDatabasePass());
+        try {
+            conn = CreateConnection.getConn(getServerAddr(),getDatabasePass());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return null != conn;
     }
 
