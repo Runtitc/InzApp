@@ -1,5 +1,6 @@
 package database.daoimpl;
 
+import app.LoginServerDialog;
 import database.config.CreateConnection;
 import database.dao.SnortLogDao;
 import database.user.User;
@@ -28,7 +29,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
         ResultSet resultSet = null;
 
         try {
-            conn = CreateConnection.getConn();
+            conn = CreateConnection.getConn(LoginServerDialog.getServerAddr(),LoginServerDialog.getDatabasePass());
             // Without the account selection....
             q = conn.prepareStatement("" +
                     "SELECT " +

@@ -1,5 +1,6 @@
 package database.daoimpl;
 
+import app.LoginServerDialog;
 import database.config.CreateConnection;
 import database.dao.UserDao;
 import database.user.User;
@@ -20,7 +21,7 @@ public class UserDaoImpl implements UserDao{
         PreparedStatement q = null;
 
         try{
-            conn = CreateConnection.getConn();
+            conn = CreateConnection.getConn(LoginServerDialog.getServerAddr(),LoginServerDialog.getDatabasePass());
             q = conn.prepareStatement("INSERT INTO users (Username, Password) values (?, ?);");
             q.setString(1, user.getUsername());
             q.setString(2, user.getPassword());
@@ -55,7 +56,7 @@ public class UserDaoImpl implements UserDao{
         ResultSet resultSet = null;
 
         try{
-            conn = CreateConnection.getConn();
+            conn = CreateConnection.getConn(LoginServerDialog.getServerAddr(),LoginServerDialog.getDatabasePass());
             q = conn.prepareStatement("SELECT * FROM users WHERE Username = ?");
             q.setString(1, username);
 

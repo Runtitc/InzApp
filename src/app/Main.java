@@ -1,4 +1,4 @@
-package sample;
+package app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,18 +10,26 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        checkSnortRunning(primaryStage);
+        insertServerAddress(primaryStage);
     }
 
-    public void checkSnortRunning(Stage primaryStage) throws Exception {
-        //Here we need to check whether Snort is running as a daemon.
-        // To do tis we can use a bash command PGREP and see whether the process is already running.
-        String appName = "snort";
+    public void insertServerAddress(Stage primaryStage) throws Exception {
+
+        while (true) {
+            LoginServerDialog serverAddressInput = new LoginServerDialog();
+
+            if (LoginServerDialog.validate(LoginServerDialog.getServerAddr(), LoginServerDialog.getDatabasePass())) {
+                break;
+
+            } else {
+                new AlertBox("makingConnErr", "Niepoprawny dane");
+            }
+        }
         startApp(primaryStage);
     }
 
     public void startApp(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("view/signin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/signin.fxml"));
         primaryStage.setTitle("Snort Log Manager");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);

@@ -5,7 +5,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllerimpl.SignInController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllerPackage.controllerimpl.SignInController">
    <center>
       <VBox prefHeight="180.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
@@ -19,6 +19,12 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </PasswordField>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="serverAddress" prefHeight="25.0" prefWidth="487.0" promptText="Adres serwera" />
+                  <TextField fx:id="portAddress" prefHeight="25.0" prefWidth="288.0" promptText="Port" />
+               </children>
+            </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="25.0" prefWidth="215.0" text="Zarejestruj nowe konto" />

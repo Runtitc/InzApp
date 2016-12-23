@@ -1,5 +1,7 @@
-package sample.controllerimpl;
+package controllerPackage.controllerimpl;
 
+import app.AlertBox;
+import controllerPackage.controller.Controller;
 import database.daoimpl.UserDaoImpl;
 import database.user.User;
 import javafx.event.ActionEvent;
@@ -7,8 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import sample.AlertBox;
-import sample.controller.Controller;
 
 import java.io.IOException;
 
@@ -27,17 +27,17 @@ public class SignInController extends Controller{
     public void onEventOccured(ActionEvent event) throws IOException {
         super.onEventOccured(event);
 
-        if (id.equals(registerButton.getId())){ switchScene(event, "../view/signup.fxml"); }
+        if (id.equals(registerButton.getId())){ switchScene(event, "../../view/signup.fxml"); }
         //if (id.equals(guestLogInButton.getId().toString())){ switchScene(event, "../view/mainWindow.fxml"); }
         if (id.equals(loginButton.getId().toString())){
             try {
                 if (!loginUsername.getText().isEmpty() && !passwordUsername.getText().isEmpty()) {
                     if (validateUser(loginUsername.getText(), passwordUsername.getText())) {
-                        switchScene(event, "../view/mainWindow.fxml");
+                        switchScene(event, "../../view/mainWindow.fxml");
                         //tutaj jakos trzeba przeslac dane do MainWindow na temat logowania
                     }
                 } else {
-                    AlertBox alert = new AlertBox("loginErr", "Fields login and passwor cannot be empty.");
+                    AlertBox alert = new AlertBox("loginErr", "Pola Login oraz Hasło nie mogą być puste!");
                 }
                 //validateUser();
             }catch (IOException e){
@@ -59,14 +59,14 @@ public class SignInController extends Controller{
                 if (user.getPassword().equals(pass)){
                     return true;
                 } else {
-                    AlertBox alert = new AlertBox("loginErr", "Please enter the data correctly.");
+                    AlertBox alert = new AlertBox("loginErr", "Prosze wprowadź dane poprawne.");
                 }
             }else{
-                AlertBox alert = new AlertBox("loginnErr", "Please enter the data correctly.");
+                AlertBox alert = new AlertBox("loginnErr", "Prosze wprowadź dane poprawne.");
             }
             return false;
         }else{
-            AlertBox alert = new AlertBox("loginErr", "Please enter the data correctly.");
+            AlertBox alert = new AlertBox("loginErr", "Proszę wprowadź dane poprawnie");
             return false;
         }
     }

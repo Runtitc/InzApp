@@ -1,5 +1,6 @@
-package sample.controllerimpl;
+package controllerPackage.controllerimpl;
 
+import app.LoginServerDialog;
 import database.config.CreateConnection;
 import database.daoimpl.SnortLogDaoImpl;
 import database.user.User;
@@ -10,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sample.AlertBox;
 
 import java.io.IOException;
 
@@ -37,9 +37,7 @@ public class MainWindowController{
     @FXML private MenuBar menuBar;
 
     public void initialize(){
-        System.out.println("jestem w mainWindow");
-
-        CreateConnection.getConn();
+        CreateConnection.getConn(LoginServerDialog.getServerAddr(),LoginServerDialog.getDatabasePass());
 
         SnortLogDaoImpl Logs = new SnortLogDaoImpl();
         snortLogs = Logs.selectLogsByUsername(temporaryUser);
@@ -100,7 +98,7 @@ public class MainWindowController{
                 refreshLogs();
             }
             else  if (menuItemId.equals("aboutMenuButton")){
-                AlertBox alert = new AlertBox("about");
+                //AlertBox alert = new AlertBox("about");
             }
         }
         System.out.println(event.getSource());

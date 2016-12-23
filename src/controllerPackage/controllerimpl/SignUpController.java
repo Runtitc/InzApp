@@ -1,5 +1,7 @@
-package sample.controllerimpl;
+package controllerPackage.controllerimpl;
 
+import app.AlertBox;
+import controllerPackage.controller.Controller;
 import database.daoimpl.UserDaoImpl;
 import database.user.User;
 import javafx.event.ActionEvent;
@@ -7,8 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import sample.AlertBox;
-import sample.controller.Controller;
 
 import java.io.IOException;
 
@@ -42,10 +42,10 @@ public class SignUpController extends Controller{
                 UserDaoImpl user = new UserDaoImpl();
                 user.createUser(new User(registerLoginInput.getText(), registerPassInput.getText()));
                 AlertBox alert = new AlertBox("registrationSucc", "You can now login to the Application");
-                switchScene(event, "../view/signin.fxml");
+                switchScene(event, "../../view/signin.fxml");
             }
         }
-        if (id.equals(registerCancel.getId())){ switchScene(event, "../view/signin.fxml"); }
+        if (id.equals(registerCancel.getId())){ switchScene(event, "../../view/signin.fxml"); }
 
     }
 
