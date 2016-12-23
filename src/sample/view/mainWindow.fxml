@@ -2,24 +2,24 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllerimpl.MainWindowController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllerimpl.MainWindowController">
     <top>
         <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Program">
                     <items>
-                        <MenuItem fx:id="signinMenuButton" mnemonicParsing="false" onAction="#onEventOccured" text="Powrót do ekranu głównego" />
+                        <MenuItem fx:id="signinMenuButton" mnemonicParsing="false" onAction="#onEventOccured" text="Powrót do okna logowania" />
                         <MenuItem fx:id="closeMenuButton" mnemonicParsing="false" onAction="#onEventOccured" text="Zamknij aplikację" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Baza">
+                <Menu mnemonicParsing="false" text="Baza danych">
                     <items>
                         <MenuItem fx:id="refreshMenuButton" mnemonicParsing="false" onAction="#onEventOccured" text="Odśwież bazę" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Pomoc">
                     <items>
-                        <MenuItem fx:id="aboutMenuButton" mnemonicParsing="false" onAction="#onEventOccured" text="O programie" />
+                        <MenuItem fx:id="aboutMenuButton" mnemonicParsing="false" onAction="#onEventOccured" text="O programie.." />
                     </items>
                 </Menu>
             </menus>
@@ -29,11 +29,11 @@
         <TableView fx:id="mainWindowTable" onMouseClicked="#rowClicked" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="mainWindowColumnCid" prefWidth="44.0" text="CID" />
-            <TableColumn fx:id="mainWindowColumnSig" prefWidth="215.0" text="Signature" />
-                <TableColumn fx:id="mainWindowColumnSrcAddr" prefWidth="172.0" text="Source Address" />
-                <TableColumn fx:id="mainWindowColumnDestAddr" prefWidth="169.0" text="Destination Address" />
-            <TableColumn fx:id="mainWindowColumnProt" minWidth="6.0" prefWidth="107.0" text="Protocol" />
-                <TableColumn fx:id="mainWindowColumnTime" minWidth="0.0" prefWidth="319.0" text="Time" />
+            <TableColumn fx:id="mainWindowColumnSig" prefWidth="215.0" text="Sygnatura" />
+                <TableColumn fx:id="mainWindowColumnSrcAddr" prefWidth="172.0" text="Adres źródła" />
+                <TableColumn fx:id="mainWindowColumnDestAddr" prefWidth="169.0" text="Adres przeznaczenia" />
+            <TableColumn fx:id="mainWindowColumnProt" minWidth="6.0" prefWidth="107.0" text="Protokół" />
+                <TableColumn fx:id="mainWindowColumnTime" minWidth="0.0" prefWidth="319.0" text="Czas" />
             </columns>
         </TableView>
     </center>

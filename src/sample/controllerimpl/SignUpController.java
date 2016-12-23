@@ -32,16 +32,16 @@ public class SignUpController extends Controller{
 
             }
             else if (!checkPasswordEqual(registerPassInput.getText(), registerPassRepeatInput.getText())) {
-                AlertBox alert = new AlertBox("registrationErr", "Podane hasla roznia sie");
+                AlertBox alert = new AlertBox("registrationErr", "Password are not the same.");
             }
             else if (!checkPasswordLength(registerPassInput.getText())) {
-                AlertBox alert = new AlertBox("registrationErr", "Podane haslo musi byc dluzsze niz 8 znakow.");
+                AlertBox alert = new AlertBox("registrationErr", "The given password must contain more than 8 characters");
             }
             else
             {
                 UserDaoImpl user = new UserDaoImpl();
                 user.createUser(new User(registerLoginInput.getText(), registerPassInput.getText()));
-                AlertBox alert = new AlertBox("registrationSucc", "Mozesz teraz zalogowac sie do aplikacji.");
+                AlertBox alert = new AlertBox("registrationSucc", "You can now login to the Application");
                 switchScene(event, "../view/signin.fxml");
             }
         }
@@ -70,12 +70,7 @@ public class SignUpController extends Controller{
     }
 
     public boolean checkUsernameLength(String username){
-        if (username.length() >= 40){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return username.length() >= 40;
     }
 
     public boolean checkIfTheUsernameHasForbiddenCharacters(String username){
@@ -115,20 +110,14 @@ public class SignUpController extends Controller{
         UserDaoImpl userToChecked = new UserDaoImpl();
         User usernameToChecked = userToChecked.selectByUsername(username);
 
-        if (null == usernameToChecked.getUsername()){
-            // user does not exist and it is OK, so return false
-            return false;
-        }else{
-            //user does exist and it is NOT OK, so return truth
-            return true;
-        }
+        return null != usernameToChecked.getUsername();
     }
 
     public boolean checkPasswordEqual(String pass1, String pass2){
-        return (pass2.equals(pass1)) ? true: false;
+        return (pass2.equals(pass1));
     }
 
     public boolean checkPasswordLength(String pass1) {
-        return (pass1.length()>=8)? true: false;
+        return (pass1.length() >= 8);
     }
 }

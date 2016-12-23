@@ -1,10 +1,8 @@
-package sample;
+/*package sample;
 
 import java.io.IOException;
 
-/**
- * Created by Przemix on 10/12/16.
- */
+
 public class SnortInstaller {
     private String filePath;
 
@@ -22,3 +20,4 @@ public class SnortInstaller {
         }
     }
 }
+*/

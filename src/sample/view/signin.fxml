@@ -9,26 +9,21 @@
    <center>
       <VBox prefHeight="180.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="loginUsername" onAction="#onEventOccured" promptText="login">
+            <TextField fx:id="loginUsername" onAction="#onEventOccured" promptText="Login">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </TextField>
-            <PasswordField fx:id="passwordUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="376.0" promptText="haslo">
+            <PasswordField fx:id="passwordUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="376.0" promptText="Hasło">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </PasswordField>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="25.0" prefWidth="140.0" text="Zaloz nowe konto" />
-                  <Region prefHeight="100.0" prefWidth="33.0" />
-                  <Button fx:id="guestLogInButton" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="25.0" prefWidth="142.0" text="Zaloguj jako Gosc">
-                     <HBox.margin>
-                        <Insets right="4.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="25.0" prefWidth="94.0" text="Zaloguj sie" />
+                  <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="25.0" prefWidth="215.0" text="Zarejestruj nowe konto" />
+                  <Region prefHeight="41.0" prefWidth="101.0" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="25.0" prefWidth="126.0" text="Zaloguj" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -36,7 +31,7 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <TextArea editable="false" opacity="0.4" prefHeight="200.0" prefWidth="200.0" text="Drogi uzytkowniku!&#10;W celu uzytkowania z aplikacji mobilnej potrzebne jest &#10;zalozenie konta, zatem jesli go jeszcze nie posiadasz dla&#10;swojego urzadzenia, prosze zaloz je teraz.">
+                  <TextArea editable="false" opacity="0.4" prefHeight="200.0" prefWidth="200.0" text="Drogi Użytkowniku!&#10;W celu skorzystania z aplikacji w systemie Android, &#10;potrzebujesz zarejestrować konto. Pozwoli to na &#10;korzystanie z aplikacji w systemie Android ">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -52,9 +47,9 @@
    <top>
       <VBox prefHeight="128.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="24.0" prefWidth="127.0" text="Logowanie">
+            <Label prefHeight="21.0" prefWidth="170.0" text="Panel logowania">
                <VBox.margin>
-                  <Insets left="250.0" top="100.0" />
+                  <Insets left="220.0" top="100.0" />
                </VBox.margin>
                <font>
                   <Font size="20.0" />

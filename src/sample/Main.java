@@ -11,14 +11,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         checkSnortRunning(primaryStage);
-
     }
 
     public void checkSnortRunning(Stage primaryStage) throws Exception {
         //Here we need to check whether Snort is running as a daemon.
         // To do tis we can use a bash command PGREP and see whether the process is already running.
         String appName = "snort";
-
         startApp(primaryStage);
     }
 
@@ -32,21 +30,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        /*ExCmd sample = new ExCmd();
-        System.out.println("Podaj haslo: ");
-        //probowalem tutaj przeslac rzeczy do skryptu, ale tak czy siak, potem potrzeujemy modulu EXCEP, a do instalacji tego moduu potrzene jest haslo
-        // Jedyne roziwiazanie jakie widzie na ten moment, to wyslanie prosto hasla do strumienia, gdzie prosza o haslo, a nastepnie przekierowanie polecenia dalej
-        // kazde polecenie linijka po linijce powinno raczej zostac wykonywane komenda po komendzie
-        Scanner reader = new Scanner(System.in);
-        String n = reader.next(); // Scans the next token of the input as an int.
-        System.out.println(n);
-
-        System.out.println(sample.executeCommand("./snortInstall.sh", true));*/
-
-        String abc="asd";
-
-        System.out.print(abc.split("").length);
-        //System.out.print(Character.toString((char) 62));
         launch(args);
 
     }

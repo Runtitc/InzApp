@@ -39,43 +39,43 @@ public class AlertBox {
     }
 
     private void about() {
-        String title = "O programie";
+        String title = "About the Program";
         String headerText = "Snort Intelligent Manager";
         String contentText = "Snort Intelligent Manager 2016\n" +
-                "Programista: Przemysław Brożek\n" +
-                "Praca Inżynierska AGH 2016/2017\n";
+                "Programmer: Przemysław Brożek\n" +
+                "Master Thesis AGH 2016/2017\n";
 
         Alert aboutAlert = createInformationAlert(title, headerText, contentText);
     }
 
     private void savedSuccessfully() {
-        String title = "Powodzenie!";
-        String headerText = "Zapis OK";
-        String contentText = "Plik zostal zapisany";
+        String title = "OK!";
+        String headerText = "Saved Sucessfuly";
+        String contentText = "The file was saved.";
 
         Alert saveSuccessful = createInformationAlert(title, headerText, contentText);
     }
 
 
     private void registrationError(String additionalInformation){
-        String title = "Blad!";
-        String headerText = "Niepoprawne wypelnienie formularza.";
+        String title = "Error!";
+        String headerText = "The form was completed incorrectly!";
         String contentText = additionalInformation;
 
         Alert RegErrAlert = createInformationAlert(title, headerText, contentText);
     }
 
     private void registrationSucc(String additionalInformation){
-        String title = "Rejestracja zakonczona";
-        String headerText = "Konto zostalo zalozone pomyslnie.";
+        String title = "Completed!";
+        String headerText = "The account has been set up correctly.";
         String contentText = additionalInformation;
 
         Alert RegErrAlert = createInformationAlert(title, headerText, contentText);
     }
 
     private void loginErr(String additionalInformation){
-        String title = "Blad!";
-        String headerText = "Niepoprawne dane logowania";
+        String title = "Error!";
+        String headerText = "The password or username is incorrect.";
         String contentText = additionalInformation;
 
         Alert logErrAlert = createInformationAlert(title, headerText, contentText);
@@ -102,14 +102,14 @@ public class AlertBox {
         alert.setContentText(contentText);
     }
     private void noSnortDetectedAlert(String additionalInformation) {
-        String title = "Uwaga";
-        String headerText = "Nie wykryto zainstalowanego programu Snort";
-        String contentText = "Czy zainstalowac program Snort?";
+        String title = "Note";
+        String headerText = "Snort installation not detected!";
+        String contentText = "Install the snort in accordance to instructions.";
 
         Alert noSnortAlert = createConfirmationAlert(title, headerText, contentText);
 
         Optional<ButtonType> result = noSnortAlert.showAndWait();
-
+        /*
         if (result.get() == ButtonType.OK) {
             SnortInstaller installer = new SnortInstaller("");
             // check the type of OS
@@ -124,5 +124,6 @@ public class AlertBox {
         else{
             System.exit(0);
         }
+        */
     }
 }

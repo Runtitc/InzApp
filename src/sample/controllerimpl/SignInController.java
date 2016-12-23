@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class SignInController extends Controller{
     @FXML private Button registerButton;
-    @FXML private Button guestLogInButton; //IMPORTANT
+   // @FXML private Button guestLogInButton; //IMPORTANT
     @FXML private Button loginButton;
 
     //input data
@@ -28,18 +28,21 @@ public class SignInController extends Controller{
         super.onEventOccured(event);
 
         if (id.equals(registerButton.getId())){ switchScene(event, "../view/signup.fxml"); }
-        if (id.equals(guestLogInButton.getId().toString())){ switchScene(event, "../view/mainWindow.fxml"); }
+        //if (id.equals(guestLogInButton.getId().toString())){ switchScene(event, "../view/mainWindow.fxml"); }
         if (id.equals(loginButton.getId().toString())){
-            if (!loginUsername.getText().isEmpty() && !passwordUsername.getText().isEmpty())
-            {
-                if (validateUser(loginUsername.getText(), passwordUsername.getText())){
-                    switchScene(event, "../view/mainWindow.fxml");
-                    //tutaj jakos trzeba przeslac dane do MainWindow na temat logowania
+            try {
+                if (!loginUsername.getText().isEmpty() && !passwordUsername.getText().isEmpty()) {
+                    if (validateUser(loginUsername.getText(), passwordUsername.getText())) {
+                        switchScene(event, "../view/mainWindow.fxml");
+                        //tutaj jakos trzeba przeslac dane do MainWindow na temat logowania
+                    }
+                } else {
+                    AlertBox alert = new AlertBox("loginErr", "Fields login and passwor cannot be empty.");
                 }
-            }else{
-                AlertBox alert = new AlertBox("loginErr", "Pole login i haslo nie moga byc puste");
+                //validateUser();
+            }catch (IOException e){
+                e.printStackTrace();
             }
-            //validateUser();
         }
 
     }
@@ -56,14 +59,14 @@ public class SignInController extends Controller{
                 if (user.getPassword().equals(pass)){
                     return true;
                 } else {
-                    AlertBox alert = new AlertBox("loginErr", "Prosze wprowadzic dane ponownie");
+                    AlertBox alert = new AlertBox("loginErr", "Please enter the data correctly.");
                 }
             }else{
-                AlertBox alert = new AlertBox("loginnErr", "Prosze wprowadzic dane ponownie");
+                AlertBox alert = new AlertBox("loginnErr", "Please enter the data correctly.");
             }
             return false;
         }else{
-            AlertBox alert = new AlertBox("loginErr", "Prosze wprowadzic dane ponownie");
+            AlertBox alert = new AlertBox("loginErr", "Please enter the data correctly.");
             return false;
         }
     }
