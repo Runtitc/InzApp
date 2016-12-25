@@ -32,7 +32,7 @@ public class SignUpController extends Controller{
 
             }
             else if (!checkPasswordEqual(registerPassInput.getText(), registerPassRepeatInput.getText())) {
-                AlertBox alert = new AlertBox("registrationErr", "Password are not the same.");
+                AlertBox alert = new AlertBox("registrationErr", "Hasa nie s");
             }
             else if (!checkPasswordLength(registerPassInput.getText())) {
                 AlertBox alert = new AlertBox("registrationErr", "The given password must contain more than 8 characters");

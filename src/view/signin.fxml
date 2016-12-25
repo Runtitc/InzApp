@@ -5,28 +5,34 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllerPackage.controllerimpl.SignInController">
    <center>
       <VBox prefHeight="180.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="loginUsername" onAction="#onEventOccured" promptText="Login">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <PasswordField fx:id="passwordUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="376.0" promptText="Hasło">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </PasswordField>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="serverAddress" prefHeight="25.0" prefWidth="487.0" promptText="Adres serwera" />
-                  <TextField fx:id="portAddress" prefHeight="25.0" prefWidth="288.0" promptText="Port" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login: ">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="loginUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="363.0" promptText="Login" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło:">
+                     <HBox.margin>
+                        <Insets right="3.0" top="5.0" />
+                     </HBox.margin>
+                  </Text>
+                  <PasswordField fx:id="passwordUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="359.0" promptText="Hasło" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="38.0" prefWidth="72.0" />
                   <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="25.0" prefWidth="215.0" text="Zarejestruj nowe konto" />
                   <Region prefHeight="41.0" prefWidth="101.0" />
                   <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="25.0" prefWidth="126.0" text="Zaloguj" />
@@ -37,7 +43,7 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <TextArea editable="false" opacity="0.4" prefHeight="200.0" prefWidth="200.0" text="Drogi Użytkowniku!&#10;W celu skorzystania z aplikacji w systemie Android, &#10;potrzebujesz zarejestrować konto. Pozwoli to na &#10;korzystanie z aplikacji w systemie Android ">
+                  <TextArea editable="false" opacity="0.4" prefHeight="138.0" prefWidth="349.0" text="Drogi Użytkowniku!&#10;W celu skorzystania z aplikacji w systemie Android, &#10;potrzebujesz zarejestrować konto. Pozwoli to na &#10;korzystanie z aplikacji w systemie Android ">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
