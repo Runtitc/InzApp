@@ -32,16 +32,16 @@ public class SignUpController extends Controller{
 
             }
             else if (!checkPasswordEqual(registerPassInput.getText(), registerPassRepeatInput.getText())) {
-                AlertBox alert = new AlertBox("registrationErr", "Hasa nie s");
+                AlertBox alert = new AlertBox("registrationErr", "Hasła nie są te same.");
             }
             else if (!checkPasswordLength(registerPassInput.getText())) {
-                AlertBox alert = new AlertBox("registrationErr", "The given password must contain more than 8 characters");
+                AlertBox alert = new AlertBox("registrationErr", "Hasło musi mieć minimum 8 znakow");
             }
             else
             {
                 UserDaoImpl user = new UserDaoImpl();
                 user.createUser(new User(registerLoginInput.getText(), registerPassInput.getText()));
-                AlertBox alert = new AlertBox("registrationSucc", "You can now login to the Application");
+                AlertBox alert = new AlertBox("registrationSucc", "Możesz teraz zalogować się do aplikacji");
                 switchScene(event, "../../view/signin.fxml");
             }
         }

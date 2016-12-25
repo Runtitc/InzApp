@@ -1,9 +1,8 @@
 package database.daoimpl;
 
-import app.LoginServerDialog;
+import app.Dialog;
 import database.config.CreateConnection;
 import database.dao.SnortLogDao;
-import database.user.User;
 import database.user.snortLog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,14 +21,14 @@ public class SnortLogDaoImpl implements SnortLogDao{
     private ObservableList<snortLog> snortLogsList;
 
     @Override
-    public ObservableList<snortLog> selectLogsByUsername(User user) {
+    public ObservableList<snortLog> selectLogs() {
         snortLogsList = FXCollections.observableArrayList();
         Connection conn = null;
         PreparedStatement q = null;
         ResultSet resultSet = null;
 
         try {
-            conn = CreateConnection.getConn(LoginServerDialog.getServerAddr(),LoginServerDialog.getDatabasePass());
+            conn = CreateConnection.getConn(Dialog.getServerAddr(), Dialog.getDatabasePass());
             // Without the account selection....
             q = conn.prepareStatement("" +
                     "SELECT " +
@@ -42,7 +41,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
                     "FROM signature, event, iphdr " +
                     "WHERE " +
                         "iphdr.cid=event.cid AND " +
-                        "event.signature=signature.sig_id");// WHERE idUser = jakis tam user
+                        "event.signature=signature.sig_id");// extendable to users
 
             resultSet = q.executeQuery();
 
@@ -88,6 +87,8 @@ public class SnortLogDaoImpl implements SnortLogDao{
         }
         return snortLogsList;
     }
+
+    //public ObservableList SelectIpSpecification()
 
     private String convertToName(String ip_proto) {
         if (Objects.equals(ip_proto, "1")) return "ICMP";

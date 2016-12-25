@@ -16,18 +16,18 @@ import java.io.IOException;
  * Created by runtitc on 10/25/16.
  */
 public class SignInController extends Controller{
+
     @FXML private Button registerButton;
     @FXML private Button loginButton;
 
     //input data
-    @FXML private TextField loginUsername;
-    @FXML private PasswordField passwordUsername;
+    @FXML TextField loginUsername;
+    @FXML PasswordField passwordUsername;
 
     public void onEventOccured(ActionEvent event) throws IOException {
         super.onEventOccured(event);
 
         if (id.equals(registerButton.getId())){ switchScene(event, "../../view/signup.fxml"); }
-        //if (id.equals(guestLogInButton.getId().toString())){ switchScene(event, "../view/mainWindow.fxml"); }
         if (id.equals(loginButton.getId().toString())){
             try {
                 if (!loginUsername.getText().isEmpty() && !passwordUsername.getText().isEmpty()) {
@@ -38,7 +38,6 @@ public class SignInController extends Controller{
                 } else {
                     AlertBox alert = new AlertBox("loginErr", "Pola Login oraz Hasło nie mogą być puste!");
                 }
-                //validateUser();
             }catch (IOException e){
                 e.printStackTrace();
             }

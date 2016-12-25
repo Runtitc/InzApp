@@ -18,14 +18,14 @@ public class AlertBox {
             noSnortDetectedAlert(additionalInformation);
         } else if (type.equals("registrationErr")){
             registrationError(additionalInformation);
-        }
-        else if (type.equals("makingConnErr")){
+        } else if (type.equals("makingConnErr")){
             makingConnErr(additionalInformation);
-        }
-        else if (type.equals("registrationSucc")){
+        } else if (type.equals("registrationSucc")){
             registrationSucc(additionalInformation);
         } else if (type.equals(("loginErr"))){
             loginErr(additionalInformation);
+        } else if (type.equals(("about"))){
+            about();
         }
     }
 

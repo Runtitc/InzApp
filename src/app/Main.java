@@ -10,19 +10,20 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        insertServerAddress(primaryStage);
+        enterServerAddress(primaryStage);
     }
 
-    public void insertServerAddress(Stage primaryStage) throws Exception {
+    public void enterServerAddress(Stage primaryStage) throws Exception {
 
         while (true) {
-            LoginServerDialog serverAddressInput = new LoginServerDialog();
+            Dialog serverAddressInput = new Dialog();
+            serverAddressInput.createDialog();
 
-            if (LoginServerDialog.validate(LoginServerDialog.getServerAddr(), LoginServerDialog.getDatabasePass())) {
+            if (Dialog.validateConn(Dialog.getServerAddr(), Dialog.getDatabasePass())) {
                 break;
 
             } else {
-                new AlertBox("makingConnErr", "Niepoprawny dane");
+                new AlertBox("makingConnErr", "Niepoprawne dane");
             }
         }
         startApp(primaryStage);
