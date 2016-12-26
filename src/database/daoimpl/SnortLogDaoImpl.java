@@ -4,6 +4,7 @@ import app.DialogPopUp;
 import database.config.CreateConnection;
 import database.dao.SnortLogDao;
 import database.user.SnortLogIpDetails;
+import database.user.SnortLogTCPDetails;
 import database.user.snortLog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
 
     private ObservableList<snortLog> snortLogsList;
     private ObservableList<SnortLogIpDetails> snortLogListSpecification;
+    private ObservableList<SnortLogIpDetails> snortLogTCPListSpecification;
 
     @Override
     public ObservableList<snortLog> selectLogs() {
@@ -90,7 +92,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
         return snortLogsList;
     }
 
-    public ObservableList<SnortLogIpDetails> SelectLogIpSpecification(Integer selectedCid, boolean isData){
+    public ObservableList<SnortLogIpDetails> SelectLogIpSpecification(Integer selectedCid, String protocol){
         snortLogListSpecification = FXCollections.observableArrayList();
         Connection conn = null;
         PreparedStatement q = null;
@@ -105,7 +107,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
             Integer ipOffId =null;
             Integer ipFlagId = null;
             Integer ipHeaderLengthId = null;
-            Integer ipProtocol  = null;
+            String ipProtocol  = null;
             Integer ipCheckSumId = null;
             Integer ipTosId = null;
             Integer ipSeqNumbId = null;
@@ -114,7 +116,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
             String ipSrcId = null;
             String ipDestId = null;
             String ipPayloadId = null;
-            if (isData) {
+            if (!protocol.equals("TCP")) {
                 q = conn.prepareStatement("" +
                         "select " +
                         "ip_ttl, " +
@@ -133,8 +135,8 @@ public class SnortLogDaoImpl implements SnortLogDao{
                         "FROM iphdr, data " +
                         "WHERE " +
                         "iphdr.cid=data.cid AND " +
-                        " iphdr.cid=" + selectedCid);
-                resultSet = q.executeQuery();
+                        " iphdr.cid= ?" );
+                resultSet = q.executeQuery(selectedCid.toString());
 
                 while(resultSet.next()) {
 
@@ -142,7 +144,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
                     ipOffId = resultSet.getInt("ip_off");
                     ipFlagId = resultSet.getInt("ip_flags");
                     ipHeaderLengthId = resultSet.getInt("ip_hlen");
-                    ipProtocol = resultSet.getInt("ip_proto");
+                    ipProtocol = convertToName(resultSet.getString("ip_proto"));
                     ipCheckSumId = resultSet.getInt("ip_csum");
                     ipTosId = resultSet.getInt("ip_tos");
                     ipSeqNumbId = resultSet.getInt("ip_id");
@@ -170,8 +172,8 @@ public class SnortLogDaoImpl implements SnortLogDao{
                         "ip_ver, " +
                         "inet_ntoa(ip_src) AS ip_src, " +
                         "inet_ntoa(ip_dst) AS ip_dst " +
-                        "FROM iphdr WHERE iphdr.cid=" + selectedCid);
-                resultSet = q.executeQuery();
+                        "FROM iphdr WHERE iphdr.cid= ?" );
+                resultSet = q.executeQuery(selectedCid.toString());
 
 
                 while (resultSet.next()) {
@@ -180,7 +182,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
                     ipOffId = resultSet.getInt("ip_off");
                     ipFlagId = resultSet.getInt("ip_flags");
                     ipHeaderLengthId = resultSet.getInt("ip_hlen");
-                    ipProtocol = resultSet.getInt("ip_proto");
+                    ipProtocol = convertToName(resultSet.getString("ip_proto"));
                     ipCheckSumId = resultSet.getInt("ip_csum");
                     ipTosId = resultSet.getInt("ip_tos");
                     ipSeqNumbId = resultSet.getInt("ip_id");
@@ -226,15 +228,90 @@ public class SnortLogDaoImpl implements SnortLogDao{
 
     }
 
+    public ObservableList<SnortLogIpDetails> SelectLogTCPSpecification(Integer selectedCid) {
+        snortLogTCPListSpecification = FXCollections.observableArrayList();
+        Connection conn = null;
+        PreparedStatement q = null;
+        ResultSet resultSet = null;
+
+        Integer tcp_sport;
+        Integer tcp_dport;
+        Integer tcp_seq;
+        Integer tcp_ack;
+        Integer tcp_off;
+        Integer tcp_res;
+        Integer tcp_flags;
+        Integer tcp_win;
+        Integer tcp_csum;
+        Integer tcp_urp;
+        SnortLogTCPDetails selectTcpHeader;
+        try{
+            q = conn.prepareStatement("SELECT " +
+                    "  tcp_sport, " +
+                    "  tcp_dport, " +
+                    "  tcp_seq, " +
+                    "  tcp_ack, " +
+                    "  tcp_off, " +
+                    "  tcp_res, " +
+                    "  tcp_flags, " +
+                    "  tcp_win, " +
+                    "  tcp_csum, " +
+                    "  tcp_urp " +
+                    " FROM tcphdr " +
+                    "WHERE cid= ?;");
+            resultSet = q.executeQuery(selectedCid.toString());
+
+            while (resultSet.next()) {
+                tcp_sport = resultSet.getInt("tcp_sport");
+                tcp_dport = resultSet.getInt("tcp_dport");
+                tcp_seq = resultSet.getInt("tcp_seq");
+                tcp_ack = resultSet.getInt("tcp_ack");
+                tcp_off = resultSet.getInt("tcp_off");
+                tcp_res = resultSet.getInt("tcp_res");
+                tcp_flags = resultSet.getInt("tcp_flags");
+                tcp_win = resultSet.getInt("tcp_win");
+                tcp_csum = resultSet.getInt("tcp_csum");
+                tcp_urp = resultSet.getInt("tcp_urp");
+            }
+
+            selectTcpHeader = new SnortLogTCPDetails(tcp_sport, tcp_dport, tcp_seq, tcp_ack, tcp_off, tcp_res, tcp_flags,
+                    tcp_win, tcp_csum, tcp_urp);
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            if ( null != resultSet ){
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != q ){
+                try {
+                    q.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != conn){
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+        return snortLogListSpecification;
+    }
+
     private String convertToName(String ip_proto) {
         if (Objects.equals(ip_proto, "1")) return "ICMP";
         if (Objects.equals(ip_proto, "6")) return "TCP";
         if (Objects.equals(ip_proto, "17")) return "UDP";
-        if (Objects.equals(ip_proto, "46")) return "RSVP";
-        if (Objects.equals(ip_proto, "58")) return "ICMPv6";
-        if (Objects.equals(ip_proto, "88")) return "EIGRP";
-        if (Objects.equals(ip_proto, "89")) return "OSPF";
-        if (Objects.equals(ip_proto, "132")) return "SCTP";
         return ip_proto;
     }
 }

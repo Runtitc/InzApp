@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -67,8 +68,15 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Protokół warstwy wyższej :" wrappingWidth="225.0166015625" />
-                  <Text fx:id="IpProtocol" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Protokół warstwy wyższej:" wrappingWidth="225.0166015625">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></Text>
+                  <Text fx:id="IpProtocol" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.0">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></Text>
+                  <Button fx:id="showUpperLayerHeaderButtonId" mnemonicParsing="false" onAction="#onEventOccured" prefHeight="11.0" prefWidth="132.0" text="Pokaż nagłówek" />
                </children>
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
@@ -107,6 +115,12 @@
                         <TextArea fx:id="ipPayloadAsciiId" prefHeight="113.0" prefWidth="436.0" wrapText="true" />
                      </children>
                   </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="90.0" prefWidth="178.0" />
+                  <Region prefHeight="33.0" prefWidth="171.0" />
                </children>
             </HBox>
          </children>

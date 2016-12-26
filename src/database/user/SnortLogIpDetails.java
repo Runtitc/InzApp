@@ -5,11 +5,12 @@ package database.user;
  */
 public class SnortLogIpDetails {
 
+    //IP
     private Integer ipTtlId;
     private Integer ipOffId;
     private Integer ipFlagId;
     private Integer ipHeaderLengthId;
-    private Integer ipProtocol;
+    private String ipProtocol;
     private Integer ipCheckSumId;
     private Integer ipTosId;
     private Integer ipSeqNumbId;
@@ -20,6 +21,7 @@ public class SnortLogIpDetails {
     private String ipPayloadId;
     private String ipPayloardAsciiId;
 
+
     public SnortLogIpDetails(){}
 
     public SnortLogIpDetails(
@@ -27,7 +29,7 @@ public class SnortLogIpDetails {
             Integer ipOffId,
             Integer ipFlagId,
             Integer ipHeaderLengthId,
-            Integer ipProtocol,
+            String ipProtocol,
             Integer ipCheckSumId,
             Integer ipTosId,
             Integer ipSeqNumbId,
@@ -80,7 +82,7 @@ public class SnortLogIpDetails {
         return ipHeaderLengthId;
     }
 
-    public Integer getIpProtocol() {
+    public String getIpProtocol() {
         return ipProtocol;
     }
 

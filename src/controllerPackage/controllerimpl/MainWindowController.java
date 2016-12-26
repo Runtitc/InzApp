@@ -74,11 +74,7 @@ public class MainWindowController extends Controller{
                 stage.setTitle("Szczegóły alarmu, cid:"+ selectedCid);
 
                 LogDetailsController controller = loader.getController();
-                if (selectedProto.equals("TCP")){
-                    controller.setCid(selectedCid, false);
-                }else{
-                    controller.setCid(selectedCid, true);
-                }
+                controller.setIpDetailsByCidAndProto(selectedCid, selectedProto);
 
                 stage.setScene(new Scene(root));
                 stage.show();
