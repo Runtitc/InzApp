@@ -43,68 +43,43 @@ public class SnortLogTCPDetails {
         this.tcpUrp = tcpUrp;
     }
 
-    private String hexToAscii(String ipPayloadId) {
-        StringBuilder asciiOutput = new StringBuilder();
-        for (int i = 0; i < ipPayloadId.length(); i+=2) {
-            String str = ipPayloadId.substring(i, i+2);
-            asciiOutput.append((char)Integer.parseInt(str, 16));
-        }
-        return asciiOutput.toString();
+    public Integer getTcpSport() {
+        return tcpSport;
     }
 
-    public Integer getIpTtlId() {
-        return ipTtlId;
+    public Integer getTcpDport() {
+        return tcpDport;
     }
 
-    public Integer getIpOffId() {
-        return ipOffId;
+    public Integer getTcpSeq() {
+        return tcpSeq;
     }
 
-    public Integer getIpFlagId() {
-        return ipFlagId;
+    public Integer getTcpAck() {
+        return tcpAck;
     }
 
-    public Integer getIpHeaderLengthId() {
-        return ipHeaderLengthId;
+    public Integer getTcpOff() {
+        return tcpOff;
     }
 
-    public String getIpProtocol() {
-        return ipProtocol;
+    public Integer getTcpRes() {
+        return tcpRes;
     }
 
-    public Integer getIpCheckSumId() {
-        return ipCheckSumId;
+    public Integer getTcpFlags() {
+        return tcpFlags;
     }
 
-    public Integer getIpTosId() {
-        return ipTosId;
+    public Integer getTcpWin() {
+        return tcpWin;
     }
 
-    public Integer getIpSeqNumbId() {
-        return ipSeqNumbId;
+    public Integer getTcpCheckSum() {
+        return tcpCheckSum;
     }
 
-    public Integer getIpLengthId() {
-        return ipLengthId;
-    }
-
-    public Integer getIpVersionId() {
-        return ipVersionId;
-    }
-
-    public String getIpSrcId() {
-        return ipSrcId;
-    }
-
-    public String getIpDestId() {
-        return ipDestId;
-    }
-
-    public String getIpPayloadId() {
-        return ipPayloadId;
-    }
-
-    public String getIpPayloardAsciiId() {
-        return ipPayloardAsciiId;
+    public Integer getTcpUrp() {
+        return tcpUrp;
     }
 }

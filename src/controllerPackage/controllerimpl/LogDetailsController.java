@@ -52,14 +52,14 @@ public class LogDetailsController extends Controller{
         super.onEventOccured(event);
         System.out.println("DSAss");
         if (id.equals(showUpperLayerHeaderButtonId.getId().toString())) {
-            System.out.println("buttncliecked");
+            System.out.println("onEventOccured logdetailscontroller: " + cid);
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/logTransportLayerDetails.fxml"));
-                Parent root = loader.load();
+                FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logTransportLayerDetails.fxml"));
+                Parent root = aloader.load();
                 Stage stage = new Stage();
                 stage.setTitle("Protokół warstwy transportowej pakietu o cid: "+ cid);
-
-                LogTransportLayerDetailsController controller = loader.getController();
+                System.out.println("LogDetailsController: " + cid);
+                LogTransportLayerDetailsController controller = aloader.getController();
                 controller.setTCPDetailsByCid(cid);
 
                 stage.setScene(new Scene(root));
