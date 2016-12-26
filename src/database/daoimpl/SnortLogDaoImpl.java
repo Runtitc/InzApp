@@ -61,7 +61,6 @@ public class SnortLogDaoImpl implements SnortLogDao{
                 snortLog selectedLog = new snortLog(cidI, sig_name, ip_src, ip_dst, ip_proto, timestamp);
                 snortLogsList.add(selectedLog);
             }
-            System.out.println(snortLogsList.getClass());
         }catch(Exception e){
             e.printStackTrace();
         }finally {
@@ -101,7 +100,6 @@ public class SnortLogDaoImpl implements SnortLogDao{
         try {
             conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
             // Without the account selection....
-            System.out.println("SnortLogDaoImpl: " + selectedCid);
             SnortLogIpDetails selectedLog;
             Integer ipTtlId =null;
             Integer ipOffId =null;
@@ -119,23 +117,23 @@ public class SnortLogDaoImpl implements SnortLogDao{
             if (!protocol.equals("TCP")) {
                 q = conn.prepareStatement("" +
                         "select " +
-                        "ip_ttl, " +
-                        "ip_off, " +
-                        "ip_flags, " +
-                        "ip_hlen, " +
-                        "ip_proto, " +
-                        "ip_csum, " +
-                        "ip_tos, " +
-                        "ip_id, " +
-                        "ip_len," +
-                        "ip_ver, " +
-                        "inet_ntoa(ip_src) AS ip_src, " +
-                        "inet_ntoa(ip_dst) AS ip_dst, " +
-                        "data_payload " +
+                            "ip_ttl, " +
+                            "ip_off, " +
+                            "ip_flags, " +
+                            "ip_hlen, " +
+                            "ip_proto, " +
+                            "ip_csum, " +
+                            "ip_tos, " +
+                            "ip_id, " +
+                            "ip_len," +
+                            "ip_ver, " +
+                            "inet_ntoa(ip_src) AS ip_src, " +
+                            "inet_ntoa(ip_dst) AS ip_dst, " +
+                            "data_payload " +
                         "FROM iphdr, data " +
                         "WHERE " +
-                        "iphdr.cid=data.cid AND " +
-                        " iphdr.cid= ?" );
+                            "iphdr.cid=data.cid AND " +
+                            "iphdr.cid= ?" );
                 q.setString(1, selectedCid.toString());
                 resultSet = q.executeQuery();
 
@@ -161,21 +159,21 @@ public class SnortLogDaoImpl implements SnortLogDao{
             }else {
                 q = conn.prepareStatement("" +
                         "select " +
-                        "ip_ttl, " +
-                        "ip_off, " +
-                        "ip_flags, " +
-                        "ip_hlen, " +
-                        "ip_proto, " +
-                        "ip_csum, " +
-                        "ip_tos, " +
-                        "ip_id, " +
-                        "ip_len," +
-                        "ip_ver, " +
-                        "inet_ntoa(ip_src) AS ip_src, " +
-                        "inet_ntoa(ip_dst) AS ip_dst " +
+                            "ip_ttl, " +
+                            "ip_off, " +
+                            "ip_flags, " +
+                            "ip_hlen, " +
+                            "ip_proto, " +
+                            "ip_csum, " +
+                            "ip_tos, " +
+                            "ip_id, " +
+                            "ip_len," +
+                            "ip_ver, " +
+                            "inet_ntoa(ip_src) AS ip_src, " +
+                            "inet_ntoa(ip_dst) AS ip_dst " +
                         "FROM iphdr WHERE iphdr.cid= ?" );
-                resultSet = q.executeQuery(selectedCid.toString());
-
+                q.setString(1, selectedCid.toString());
+                resultSet = q.executeQuery();
 
                 while (resultSet.next()) {
 
@@ -229,8 +227,8 @@ public class SnortLogDaoImpl implements SnortLogDao{
 
     }
 
-    public ObservableList<SnortLogTCPDetails> SelectLogTCPSpecification(Integer selectedCid) {
-        snortLogTCPListSpecification = FXCollections.observableArrayList();
+    public SnortLogTCPDetails SelectLogTCPSpecification(Integer selectedCid) {
+        SnortLogTCPDetails selectedTcpHeader =null;
         Connection conn = null;
         PreparedStatement q = null;
         ResultSet resultSet = null;
@@ -245,23 +243,23 @@ public class SnortLogDaoImpl implements SnortLogDao{
         Integer tcp_win = null;
         Integer tcp_csum = null;
         Integer tcp_urp = null;
-        SnortLogTCPDetails selectTcpHeader  = null;
-        try{
-            System.out.println("SnorTLOGDAoIMPL: " + selectedCid.toString());
 
-            q = conn.prepareStatement("SELECT " +
-                    "  tcp_sport, " +
-                    "  tcp_dport, " +
-                    "  tcp_seq, " +
-                    "  tcp_ack, " +
-                    "  tcp_off, " +
-                    "  tcp_res, " +
-                    "  tcp_flags, " +
-                    "  tcp_win, " +
-                    "  tcp_csum, " +
-                    "  tcp_urp " +
-                    " FROM tcphdr " +
-                    "WHERE cid= ?;");
+        try {
+            conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
+
+            q = conn.prepareStatement("" +
+                    "select " +
+                        "tcp_sport, " +
+                        "tcp_dport, " +
+                        "tcp_seq, " +
+                        "tcp_ack, " +
+                        "tcp_off, " +
+                        "tcp_res, " +
+                        "tcp_flags, " +
+                        "tcp_win, " +
+                        "tcp_csum, " +
+                        "tcp_urp " +
+                    "FROM tcphdr where cid= ?;");
             q.setString(1, selectedCid.toString());
             resultSet = q.executeQuery();
 
@@ -277,9 +275,9 @@ public class SnortLogDaoImpl implements SnortLogDao{
                 tcp_csum = resultSet.getInt("tcp_csum");
                 tcp_urp = resultSet.getInt("tcp_urp");
             }
-
-            selectTcpHeader = new SnortLogTCPDetails(tcp_sport, tcp_dport, tcp_seq, tcp_ack, tcp_off, tcp_res, tcp_flags,
+            selectedTcpHeader = new SnortLogTCPDetails(tcp_sport, tcp_dport, tcp_seq, tcp_ack, tcp_off, tcp_res, tcp_flags,
                     tcp_win, tcp_csum, tcp_urp);
+
         }catch(Exception e){
             e.printStackTrace();
         }finally {
@@ -308,8 +306,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
             }
         }
 
-
-        return snortLogTCPListSpecification;
+        return selectedTcpHeader;
     }
 
     private String convertToName(String ip_proto) {

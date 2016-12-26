@@ -50,17 +50,18 @@ public class LogDetailsController extends Controller{
 
     public void onEventOccured(ActionEvent event) throws IOException {
         super.onEventOccured(event);
-        System.out.println("DSAss");
+
         if (id.equals(showUpperLayerHeaderButtonId.getId().toString())) {
-            System.out.println("onEventOccured logdetailscontroller: " + cid);
+
             try {
                 FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logTransportLayerDetails.fxml"));
                 Parent root = aloader.load();
                 Stage stage = new Stage();
-                stage.setTitle("Protokół warstwy transportowej pakietu o cid: "+ cid);
-                System.out.println("LogDetailsController: " + cid);
+                stage.setTitle("Protokół warstwy transportowej pakietu o cid: "+ this.cid);
+
                 LogTransportLayerDetailsController controller = aloader.getController();
-                controller.setTCPDetailsByCid(cid);
+                System.out.println("oeo:przedsetTCPDeatailsByCid");
+                controller.setTCPDetailsByCid(this.cid);
 
                 stage.setScene(new Scene(root));
                 stage.show();
@@ -73,7 +74,6 @@ public class LogDetailsController extends Controller{
     public void setIpDetailsByCidAndProto(Integer cid, String protocol){
         this.cid = cid;
         this.proto = protocol;
-        System.out.println("LogDetailsController: "+cid);
 
         SnortLogDaoImpl details = new SnortLogDaoImpl();
         snortLogListSpecification = details.SelectLogIpSpecification(cid, protocol);

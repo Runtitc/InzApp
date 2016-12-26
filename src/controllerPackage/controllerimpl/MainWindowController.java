@@ -64,8 +64,6 @@ public class MainWindowController extends Controller{
 
         if(singleRow.get(0) instanceof snortLog){
             //System.out.println(singleRow.get(0));
-            System.out.println("SINGE" + selectedCid);
-            System.out.println("Proto" + selectedProto);
 
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/logdetails.fxml"));
