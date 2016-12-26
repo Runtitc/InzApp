@@ -8,13 +8,13 @@ import database.user.SnortLogTCPDetails;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
-public class LogTransportLayerDetailsController extends Controller{
+public class LogTCPDetailsController extends Controller{
 
     public Integer cid;
-    public String proto;
     private SnortLogTCPDetails snortLogTCPListSpecification;
 
     @FXML private Text sPort;
+    private String sPortString;
     @FXML private Text dPort;
     @FXML private Text seq;
     @FXML private Text ack;
@@ -25,22 +25,19 @@ public class LogTransportLayerDetailsController extends Controller{
     @FXML private Text checksum;
     @FXML private Text urgentPointer;
 
+
+
     public void initialize(){
         CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
 
-        //SnortLogDaoImpl SpecificLog = new SnortLogDaoImpl();
-
-        //ipProtocolVersion.setText("Ipv4");
     }
 
     public void setTCPDetailsByCid(Integer cid){
         this.cid = cid;
-        System.out.println("LogTransportLayerDetailsController: "+cid);
 
         SnortLogDaoImpl details = new SnortLogDaoImpl();
         snortLogTCPListSpecification = details.SelectLogTCPSpecification(cid);
 
-        System.out.printf(snortLogTCPListSpecification.getTcpCheckSum().toString());
         sPort.setText(snortLogTCPListSpecification.getTcpSport().toString());
         dPort.setText(snortLogTCPListSpecification.getTcpDport().toString());
         seq.setText(snortLogTCPListSpecification.getTcpSeq().toString());

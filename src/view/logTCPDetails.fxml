@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllerPackage.controllerimpl.LogTCPDetailsController">
+   <top>
+      <VBox prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <VBox prefHeight="359.0" prefWidth="57.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="4.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port nadawcy:" wrappingWidth="226.0166015625">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Text>
+                  <Text fx:id="sPort" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="78.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port odbiorcy:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="dPort" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer sekwencyjny:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="seq" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="106.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer potwierdzenia:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ack" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="120.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Długość nagłówka:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="offset" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zarezerwowane:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="reserved" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flagi: " wrappingWidth="225.0166015625" />
+                  <Text fx:id="flags" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Szerokość okna:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="window" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suma kontrolna:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="checksum" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="152.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wskaźnik priorytetu:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="urgentPointer" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="166.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="90.0" prefWidth="178.0" />
+                  <Region prefHeight="33.0" prefWidth="171.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

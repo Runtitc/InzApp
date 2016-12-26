@@ -3,9 +3,7 @@ package database.daoimpl;
 import app.DialogPopUp;
 import database.config.CreateConnection;
 import database.dao.SnortLogDao;
-import database.user.SnortLogIpDetails;
-import database.user.SnortLogTCPDetails;
-import database.user.snortLog;
+import database.user.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,7 +20,6 @@ public class SnortLogDaoImpl implements SnortLogDao{
 
     private ObservableList<snortLog> snortLogsList;
     private ObservableList<SnortLogIpDetails> snortLogListSpecification;
-    private ObservableList<SnortLogTCPDetails> snortLogTCPListSpecification;
 
     @Override
     public ObservableList<snortLog> selectLogs() {
@@ -228,7 +225,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
     }
 
     public SnortLogTCPDetails SelectLogTCPSpecification(Integer selectedCid) {
-        SnortLogTCPDetails selectedTcpHeader =null;
+        SnortLogTCPDetails selectedTcpHeader = null;
         Connection conn = null;
         PreparedStatement q = null;
         ResultSet resultSet = null;
@@ -246,7 +243,6 @@ public class SnortLogDaoImpl implements SnortLogDao{
 
         try {
             conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
-
             q = conn.prepareStatement("" +
                     "select " +
                         "tcp_sport, " +
@@ -305,10 +301,143 @@ public class SnortLogDaoImpl implements SnortLogDao{
                 }
             }
         }
-
         return selectedTcpHeader;
     }
 
+    public SnortLogUDPDetails SelectLogUDPSpecification(Integer selectedCid) {
+        SnortLogUDPDetails selectedUdpHeader =null;
+        Connection conn = null;
+        PreparedStatement q = null;
+        ResultSet resultSet = null;
+
+        Integer udp_sport = null;
+        Integer udp_dport = null;
+        Integer udp_len = null;
+        Integer udp_csum = null;
+
+        try {
+            conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
+            System.out.println("selectedCid: " + selectedCid.toString());
+            q = conn.prepareStatement("" +
+                    "select " +
+                    "udp_sport, " +
+                    "udp_dport, " +
+                    "udp_len, " +
+                    "udp_csum " +
+                    "FROM udphdr where cid= ?;");
+            q.setString(1, selectedCid.toString());
+            resultSet = q.executeQuery();
+
+            while (resultSet.next()) {
+                udp_sport = resultSet.getInt("udp_sport");
+                udp_dport = resultSet.getInt("udp_dport");
+                udp_len = resultSet.getInt("udp_len");
+                udp_csum = resultSet.getInt("udp_csum");
+            }
+            selectedUdpHeader = new SnortLogUDPDetails(udp_sport, udp_dport, udp_len, udp_csum);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            if ( null != resultSet ){
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != q ){
+                try {
+                    q.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != conn){
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        //System.out.println(selectedUdpHeader.getUdp_csum());
+        return selectedUdpHeader;
+    }
+
+    public SnortLogICMPDetails SelectLogIcmpSpecification(Integer selectedCid) {
+        SnortLogICMPDetails selectedIcmpHeader = null;
+        Connection conn = null;
+        PreparedStatement q = null;
+        ResultSet resultSet = null;
+
+
+        Integer icmp_type = null;
+        Integer icmp_code = null;
+        Integer icmp_csum = null;
+        Integer icmp_id = null;
+        Integer icmp_seq = null;
+
+        try {
+            conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
+
+            q = conn.prepareStatement("" +
+                    "select " +
+                    "tcp_sport, " +
+                    "tcp_dport, " +
+                    "tcp_seq, " +
+                    "tcp_ack, " +
+                    "tcp_off, " +
+                    "tcp_res, " +
+                    "tcp_flags, " +
+                    "tcp_win, " +
+                    "tcp_csum, " +
+                    "tcp_urp " +
+                    "FROM tcphdr where cid= ?;");
+            q.setString(1, selectedCid.toString());
+            resultSet = q.executeQuery();
+
+            while (resultSet.next()) {
+                icmp_type = resultSet.getInt("icmp_type");
+                icmp_code = resultSet.getInt("icmp_code");
+                icmp_csum = resultSet.getInt("icmp_csum");
+                icmp_id = resultSet.getInt("icmp_id");
+                icmp_seq = resultSet.getInt("icmp_seq");
+            }
+            selectedIcmpHeader = new SnortLogICMPDetails(icmp_type, icmp_code, icmp_csum, icmp_id, icmp_seq);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            if ( null != resultSet ){
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != q ){
+                try {
+                    q.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != conn){
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return selectedIcmpHeader;
+    }
     private String convertToName(String ip_proto) {
         if (Objects.equals(ip_proto, "1")) return "ICMP";
         if (Objects.equals(ip_proto, "6")) return "TCP";

@@ -1,5 +1,6 @@
 package controllerPackage.controllerimpl;
 
+import app.AlertBox;
 import app.DialogPopUp;
 import controllerPackage.controller.Controller;
 import database.config.CreateConnection;
@@ -52,22 +53,52 @@ public class LogDetailsController extends Controller{
         super.onEventOccured(event);
 
         if (id.equals(showUpperLayerHeaderButtonId.getId().toString())) {
+            System.out.println("Jeeeeeeeeeej");
 
-            try {
-                FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logTransportLayerDetails.fxml"));
+            /*
+            FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logTCPDetails.fxml"));
+            Parent root = aloader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Protokół TCP warstwy transportowej pakietu o cid: "+ cid);
+            LogTCPDetailsController controller = aloader.getController();
+            controller.setTCPDetailsByCid(cid);
+            stage.setScene(new Scene(root));
+            stage.show();
+*/
+
+            if (proto.equals("TCP")){
+                System.out.println("TCP"+proto);
+                FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logTCPDetails.fxml"));
                 Parent root = aloader.load();
                 Stage stage = new Stage();
-                stage.setTitle("Protokół warstwy transportowej pakietu o cid: "+ this.cid);
-
-                LogTransportLayerDetailsController controller = aloader.getController();
-                System.out.println("oeo:przedsetTCPDeatailsByCid");
-                controller.setTCPDetailsByCid(this.cid);
-
+                stage.setTitle("Protokół TCP warstwy transportowej pakietu o cid: "+ cid);
+                LogTCPDetailsController controller = aloader.getController();
+                controller.setTCPDetailsByCid(cid);
                 stage.setScene(new Scene(root));
                 stage.show();
-            }catch (Exception e){
-                e.printStackTrace();
+            }else if (proto.equals("ICMP")) {
+                FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logICMPetails.fxml"));
+                Parent root = aloader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Protokół ICMP warstwy transportowej pakietu o cid: "+ this.cid);
+                LogICMPDetailsController controller = aloader.getController();
+                //controller.setICMPDetailsByCid(this.cid);
+                stage.setScene(new Scene(root));
+                stage.show();
+            }else if (proto.equals("UDP")){
+                System.out.println("UDP"+proto);
+                FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logUDPDetails.fxml"));
+                Parent root = aloader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Protokół UDP warstwy transportowej pakietu o cid: "+ this.cid);
+                LogUDPDetailsController controller = aloader.getController();
+                controller.setUDPDetailsByCid(cid);
+                stage.setScene(new Scene(root));
+                stage.show();
+            }else{
+                new AlertBox("emptyProtocol", "Brak informacji o protokole "+proto+ "!");
             }
+
         }
     }
 
@@ -101,4 +132,6 @@ public class LogDetailsController extends Controller{
 
 
     }
+
+
 }

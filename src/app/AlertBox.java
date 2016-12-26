@@ -24,6 +24,8 @@ public class AlertBox {
             registrationSucc(additionalInformation);
         } else if (type.equals(("loginErr"))){
             loginErr(additionalInformation);
+        } else if (type.equals("emptyProtocol")) {
+            popUpWindowErr(additionalInformation);
         } else if (type.equals(("about"))){
             about();
         }
@@ -33,6 +35,15 @@ public class AlertBox {
 
         String title = "Błąd!";
         String headerText = "Wystąpił problem z połączeniem!";
+        String contentText = additionalInformation;
+
+        Alert aboutAlert = createErrAlert(title, headerText, contentText);
+    }
+
+    private void popUpWindowErr(String additionalInformation) {
+
+        String title = "Błąd!";
+        String headerText = "Otwarcie okna nie powiodlo sie!";
         String contentText = additionalInformation;
 
         Alert aboutAlert = createErrAlert(title, headerText, contentText);
