@@ -3,23 +3,23 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllerPackage.controllerimpl.LogICMPDetailsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllerPackage.controllerimpl.LogICMPDetailsController">
    <top>
       <VBox prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </top>
    <left>
-      <VBox prefHeight="359.0" prefWidth="57.0" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="150.0" prefWidth="41.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="4.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port nadawcy (2B):" wrappingWidth="226.0166015625">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ (1B):" wrappingWidth="149.0166015625">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Text>
-                  <Text fx:id="sPort" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="78.0" />
+                  <Text fx:id="icmp_type" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="172.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" />
@@ -27,8 +27,8 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port odbiorcy (2B):" wrappingWidth="225.0166015625" />
-                  <Text fx:id="dPort" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kod (1B):" wrappingWidth="149.0166015625" />
+                  <Text fx:id="icmp_code" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="165.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" />
@@ -36,8 +36,8 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer sekwencyjny (4B):" wrappingWidth="225.0166015625" />
-                  <Text fx:id="seq" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="106.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suma Kontrolna (2B):" wrappingWidth="149.0166015625" />
+                  <Text fx:id="icmp_csum" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="106.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" />
@@ -45,8 +45,8 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer potwierdzenia (4B):" wrappingWidth="225.0166015625" />
-                  <Text fx:id="ack" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="120.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Identyfikator (2B):" wrappingWidth="149.0166015625" />
+                  <Text fx:id="icmp_id" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="120.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" />
@@ -54,62 +54,17 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Długość nagłówka (4b):" wrappingWidth="225.0166015625" />
-                  <Text fx:id="offset" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suma kontrolna (2B):" wrappingWidth="149.0166015625" />
+                  <Text fx:id="icmp_seq" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
-            </HBox>
-            <HBox prefHeight="9.0" prefWidth="543.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zarezerwowane (3b):" wrappingWidth="225.0166015625" />
-                  <Text fx:id="reserved" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="9.0" prefWidth="543.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flagi (9b): " wrappingWidth="225.0166015625" />
-                  <Text fx:id="flags" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="9.0" prefWidth="543.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Szerokość okna (2B):" wrappingWidth="225.0166015625" />
-                  <Text fx:id="window" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.0" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="9.0" prefWidth="543.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suma kontrolna (2B):" wrappingWidth="225.0166015625" />
-                  <Text fx:id="checksum" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="152.0" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="9.0" prefWidth="543.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wskaźnik priorytetu (2B):" wrappingWidth="225.0166015625" />
-                  <Text fx:id="urgentPointer" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="166.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Region prefHeight="90.0" prefWidth="178.0" />
-                  <Region prefHeight="33.0" prefWidth="171.0" />
-               </children>
             </HBox>
          </children>
       </VBox>
    </center>
+   <right>
+      <Region prefHeight="310.0" prefWidth="27.0" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>

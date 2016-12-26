@@ -12,7 +12,6 @@ public class LogICMPDetailsController extends Controller{
 
     public Integer cid;
     public String proto;
-    private SnortLogICMPDetails snortLogICMPListSpecification;
 
     @FXML private Text icmp_type;
     @FXML private Text icmp_code;
@@ -22,13 +21,10 @@ public class LogICMPDetailsController extends Controller{
 
     public void initialize(){
         CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
-
-        //SnortLogDaoImpl SpecificLog = new SnortLogDaoImpl();
-
-        //ipProtocolVersion.setText("Ipv4");
     }
 
-    public void setTCPDetailsByCid(Integer cid){
+    public void setICMPDetailsByCid(Integer cid){
+        SnortLogICMPDetails snortLogICMPListSpecification;
         this.cid = cid;
         SnortLogDaoImpl details = new SnortLogDaoImpl();
         snortLogICMPListSpecification = details.SelectLogIcmpSpecification(cid);

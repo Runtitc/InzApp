@@ -18,12 +18,12 @@ import java.util.Objects;
  */
 public class SnortLogDaoImpl implements SnortLogDao{
 
-    private ObservableList<snortLog> snortLogsList;
-    private ObservableList<SnortLogIpDetails> snortLogListSpecification;
+    //private ObservableList<snortLog> snortLogsList;
+    //private ObservableList<SnortLogIpDetails> snortLogListSpecification;
 
     @Override
     public ObservableList<snortLog> selectLogs() {
-        snortLogsList = FXCollections.observableArrayList();
+        ObservableList<snortLog> snortLogsList = FXCollections.observableArrayList();
         Connection conn = null;
         PreparedStatement q = null;
         ResultSet resultSet = null;
@@ -88,29 +88,28 @@ public class SnortLogDaoImpl implements SnortLogDao{
         return snortLogsList;
     }
 
-    public ObservableList<SnortLogIpDetails> SelectLogIpSpecification(Integer selectedCid, String protocol){
-        snortLogListSpecification = FXCollections.observableArrayList();
+    public SnortLogIpDetails SelectLogIpSpecification(Integer selectedCid, String protocol){
+        SnortLogIpDetails selectedIpHeader = null;
         Connection conn = null;
         PreparedStatement q = null;
         ResultSet resultSet = null;
-
+        Integer ipTtlId =null;
+        Integer ipOffId =null;
+        Integer ipFlagId = null;
+        Integer ipHeaderLengthId = null;
+        String ipProtocol  = null;
+        Integer ipCheckSumId = null;
+        Integer ipTosId = null;
+        Integer ipSeqNumbId = null;
+        Integer ipLengthId = null;
+        Integer ipVersionId = null;
+        String ipSrcId = null;
+        String ipDestId = null;
+        String ipPayloadId = null;
         try {
             conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
             // Without the account selection....
-            SnortLogIpDetails selectedLog;
-            Integer ipTtlId =null;
-            Integer ipOffId =null;
-            Integer ipFlagId = null;
-            Integer ipHeaderLengthId = null;
-            String ipProtocol  = null;
-            Integer ipCheckSumId = null;
-            Integer ipTosId = null;
-            Integer ipSeqNumbId = null;
-            Integer ipLengthId = null;
-            Integer ipVersionId = null;
-            String ipSrcId = null;
-            String ipDestId = null;
-            String ipPayloadId = null;
+
             if (!protocol.equals("TCP")) {
                 q = conn.prepareStatement("" +
                         "select " +
@@ -150,7 +149,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
                     ipDestId = resultSet.getString("ip_dst");
                     ipPayloadId = resultSet.getString("data_payload");
                 }
-                    selectedLog = new SnortLogIpDetails(
+                    selectedIpHeader = new SnortLogIpDetails(
                             ipTtlId, ipOffId, ipFlagId, ipHeaderLengthId, ipProtocol, ipCheckSumId, ipTosId, ipSeqNumbId, ipLengthId,
                             ipVersionId, ipSrcId, ipDestId, ipPayloadId);
             }else {
@@ -187,12 +186,10 @@ public class SnortLogDaoImpl implements SnortLogDao{
                     ipSrcId = resultSet.getString("ip_src");
                     ipDestId = resultSet.getString("ip_dst");
                 }
-                selectedLog = new SnortLogIpDetails(
+                selectedIpHeader = new SnortLogIpDetails(
                         ipTtlId, ipOffId, ipFlagId, ipHeaderLengthId, ipProtocol, ipCheckSumId, ipTosId, ipSeqNumbId, ipLengthId,
                         ipVersionId, ipSrcId, ipDestId, "");
             }
-            snortLogListSpecification.add(selectedLog);
-            //System.out.println(snortLogSpecificationList.getClass());
         }catch(Exception e){
             e.printStackTrace();
         }finally {
@@ -220,7 +217,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
                 }
             }
         }
-        return snortLogListSpecification;
+        return selectedIpHeader;
 
     }
 
@@ -373,7 +370,6 @@ public class SnortLogDaoImpl implements SnortLogDao{
         PreparedStatement q = null;
         ResultSet resultSet = null;
 
-
         Integer icmp_type = null;
         Integer icmp_code = null;
         Integer icmp_csum = null;
@@ -385,17 +381,12 @@ public class SnortLogDaoImpl implements SnortLogDao{
 
             q = conn.prepareStatement("" +
                     "select " +
-                    "tcp_sport, " +
-                    "tcp_dport, " +
-                    "tcp_seq, " +
-                    "tcp_ack, " +
-                    "tcp_off, " +
-                    "tcp_res, " +
-                    "tcp_flags, " +
-                    "tcp_win, " +
-                    "tcp_csum, " +
-                    "tcp_urp " +
-                    "FROM tcphdr where cid= ?;");
+                    "icmp_type, " +
+                    "icmp_code, " +
+                    "icmp_csum, " +
+                    "icmp_id, " +
+                    "icmp_seq " +
+                    "FROM icmphdr where cid= ?;");
             q.setString(1, selectedCid.toString());
             resultSet = q.executeQuery();
 

@@ -58,21 +58,16 @@ public class MainWindowController extends Controller{
         ObservableList<snortLog> singleRow;
         singleRow = mainWindowTable.getSelectionModel().getSelectedItems();
 
-        //use getters to fetch data from objects
-        Integer selectedCid = singleRow.get(0).getMainWindowColumnCid();
-        String selectedProto = singleRow.get(0).getMainWindowColumnProt();
-
-        if(singleRow.get(0) instanceof snortLog){
-            //System.out.println(singleRow.get(0));
-
+        if(singleRow.get(0) != null){
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/logdetails.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
-                stage.setTitle("Szczegóły alarmu, cid:"+ selectedCid);
+                stage.setTitle("Szczegóły alarmu, cid:"+ singleRow.get(0).getMainWindowColumnCid());
 
                 LogDetailsController controller = loader.getController();
-                controller.setIpDetailsByCidAndProto(selectedCid, selectedProto);
+                //use getters to fetch data from objects
+                controller.setIpDetailsByCidAndProto(singleRow.get(0).getMainWindowColumnCid(), singleRow.get(0).getMainWindowColumnProt());
 
                 stage.setScene(new Scene(root));
                 stage.show();
@@ -110,6 +105,5 @@ public class MainWindowController extends Controller{
                 AlertBox alert = new AlertBox("about", "");
             }
         }
-        //System.out.println(event.getSource());
     }
 }

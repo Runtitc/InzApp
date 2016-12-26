@@ -23,9 +23,7 @@ public class Controller{
     }
 
     public void switchScene(ActionEvent event, String fxmlResource) throws IOException {
-
-        //funkcja do przechodzenia pomiedzy okienkami, najpierw ladowane sa do zmiennej resterPage obecna strona fxml
-
+        //function to switch between windows
         Parent registerPage = FXMLLoader.load(getClass().getResource(fxmlResource));
         Scene registerScene = new Scene(registerPage);
 

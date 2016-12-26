@@ -6,7 +6,6 @@ import controllerPackage.controller.Controller;
 import database.config.CreateConnection;
 import database.daoimpl.SnortLogDaoImpl;
 import database.user.SnortLogIpDetails;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +22,6 @@ public class LogDetailsController extends Controller{
 
     public Integer cid;
     public String proto;
-    private ObservableList<SnortLogIpDetails> snortLogListSpecification;
 
     @FXML private Text ipTtlId;
     @FXML private Text ipOffId;
@@ -43,31 +41,14 @@ public class LogDetailsController extends Controller{
 
     public void initialize(){
         CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
-
-        //SnortLogDaoImpl SpecificLog = new SnortLogDaoImpl();
-
-        //ipProtocolVersion.setText("Ipv4");
     }
 
     public void onEventOccured(ActionEvent event) throws IOException {
         super.onEventOccured(event);
 
         if (id.equals(showUpperLayerHeaderButtonId.getId().toString())) {
-            System.out.println("Jeeeeeeeeeej");
-
-            /*
-            FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logTCPDetails.fxml"));
-            Parent root = aloader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Protokół TCP warstwy transportowej pakietu o cid: "+ cid);
-            LogTCPDetailsController controller = aloader.getController();
-            controller.setTCPDetailsByCid(cid);
-            stage.setScene(new Scene(root));
-            stage.show();
-*/
 
             if (proto.equals("TCP")){
-                System.out.println("TCP"+proto);
                 FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logTCPDetails.fxml"));
                 Parent root = aloader.load();
                 Stage stage = new Stage();
@@ -77,12 +58,12 @@ public class LogDetailsController extends Controller{
                 stage.setScene(new Scene(root));
                 stage.show();
             }else if (proto.equals("ICMP")) {
-                FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logICMPetails.fxml"));
+                FXMLLoader aloader = new FXMLLoader(getClass().getResource("../../view/logICMPDetails.fxml"));
                 Parent root = aloader.load();
                 Stage stage = new Stage();
                 stage.setTitle("Protokół ICMP warstwy transportowej pakietu o cid: "+ this.cid);
                 LogICMPDetailsController controller = aloader.getController();
-                //controller.setICMPDetailsByCid(this.cid);
+                controller.setICMPDetailsByCid(this.cid);
                 stage.setScene(new Scene(root));
                 stage.show();
             }else if (proto.equals("UDP")){
@@ -98,7 +79,6 @@ public class LogDetailsController extends Controller{
             }else{
                 new AlertBox("emptyProtocol", "Brak informacji o protokole "+proto+ "!");
             }
-
         }
     }
 
@@ -106,32 +86,29 @@ public class LogDetailsController extends Controller{
         this.cid = cid;
         this.proto = protocol;
 
+        SnortLogIpDetails snortLogListSpecification;
         SnortLogDaoImpl details = new SnortLogDaoImpl();
         snortLogListSpecification = details.SelectLogIpSpecification(cid, protocol);
 
-        ipTtlId.setText(snortLogListSpecification.get(0).getIpTtlId().toString());
-        ipOffId.setText(snortLogListSpecification.get(0).getIpOffId().toString());
-        ipFlagId.setText(snortLogListSpecification.get(0).getIpFlagId().toString());
-        ipHeaderLengthId.setText(snortLogListSpecification.get(0).getIpHeaderLengthId().toString());
-        IpProtocol.setText(snortLogListSpecification.get(0).getIpProtocol().toString());
-        ipCheckSumId.setText(snortLogListSpecification.get(0).getIpCheckSumId().toString());
-        ipTosId.setText(snortLogListSpecification.get(0).getIpTosId().toString());
-        ipSeqNumbId.setText(snortLogListSpecification.get(0).getIpSeqNumbId().toString());
-        ipLengthId.setText(snortLogListSpecification.get(0).getIpLengthId().toString());
-        ipVersionId.setText(snortLogListSpecification.get(0).getIpVersionId().toString());
-        ipSrcId.setText(snortLogListSpecification.get(0).getIpSrcId().toString());
-        ipDestId.setText(snortLogListSpecification.get(0).getIpDestId().toString());
-        ipPayloadId.setText(snortLogListSpecification.get(0).getIpPayloadId().toString());
-        ipPayloadAsciiId.setText((snortLogListSpecification.get(0).getIpPayloardAsciiId()));
+        ipTtlId.setText(snortLogListSpecification.getIpTtlId().toString());
+        ipOffId.setText(snortLogListSpecification.getIpOffId().toString());
+        ipFlagId.setText(snortLogListSpecification.getIpFlagId().toString());
+        ipHeaderLengthId.setText(snortLogListSpecification.getIpHeaderLengthId().toString());
+        IpProtocol.setText(snortLogListSpecification.getIpProtocol().toString());
+        ipCheckSumId.setText(snortLogListSpecification.getIpCheckSumId().toString());
+        ipTosId.setText(snortLogListSpecification.getIpTosId().toString());
+        ipSeqNumbId.setText(snortLogListSpecification.getIpSeqNumbId().toString());
+        ipLengthId.setText(snortLogListSpecification.getIpLengthId().toString());
+        ipVersionId.setText(snortLogListSpecification.getIpVersionId().toString());
+        ipSrcId.setText(snortLogListSpecification.getIpSrcId().toString());
+        ipDestId.setText(snortLogListSpecification.getIpDestId().toString());
+        ipPayloadId.setText(snortLogListSpecification.getIpPayloadId().toString());
+        ipPayloadAsciiId.setText((snortLogListSpecification.getIpPayloardAsciiId()));
 
         if (protocol.equals("TCP") || protocol.equals("ICMP") || protocol.equals("UDP")){
             showUpperLayerHeaderButtonId.setDisable(false);
         }else{
             showUpperLayerHeaderButtonId.setDisable(true);
         }
-
-
     }
-
-
 }

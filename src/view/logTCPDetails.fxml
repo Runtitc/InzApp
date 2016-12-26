@@ -15,7 +15,7 @@
          <children>
             <HBox prefHeight="4.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port nadawcy:" wrappingWidth="226.0166015625">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port nadawcy (2B):" wrappingWidth="226.0166015625">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Text>
@@ -27,7 +27,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port odbiorcy:" wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port odbiorcy (2B):" wrappingWidth="225.0166015625" />
                   <Text fx:id="dPort" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
                </children>
                <VBox.margin>
@@ -36,7 +36,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer sekwencyjny:" wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer sekwencyjny (4B):" wrappingWidth="225.0166015625" />
                   <Text fx:id="seq" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="106.0" />
                </children>
                <VBox.margin>
@@ -45,7 +45,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer potwierdzenia:" wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer potwierdzenia (4B):" wrappingWidth="225.0166015625" />
                   <Text fx:id="ack" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="120.0" />
                </children>
                <VBox.margin>
@@ -54,7 +54,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Długość nagłówka:" wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Długość nagłówka (4b):" wrappingWidth="225.0166015625" />
                   <Text fx:id="offset" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
                </children>
                <VBox.margin>
@@ -63,7 +63,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zarezerwowane:" wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zarezerwowane (4b):" wrappingWidth="225.0166015625" />
                   <Text fx:id="reserved" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
                </children>
                <VBox.margin>
@@ -72,7 +72,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flagi: " wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flag (9b)i: " wrappingWidth="225.0166015625" />
                   <Text fx:id="flags" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
                </children>
                <VBox.margin>
@@ -81,7 +81,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Szerokość okna:" wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Szerokość okna (2B):" wrappingWidth="225.0166015625" />
                   <Text fx:id="window" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.0" />
                </children>
                <VBox.margin>
@@ -90,7 +90,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suma kontrolna:" wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suma kontrolna (2B):" wrappingWidth="225.0166015625" />
                   <Text fx:id="checksum" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="152.0" />
                </children>
                <VBox.margin>
@@ -99,7 +99,7 @@
             </HBox>
             <HBox prefHeight="9.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wskaźnik priorytetu:" wrappingWidth="225.0166015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wskaźnik priorytetu (2B):" wrappingWidth="225.0166015625" />
                   <Text fx:id="urgentPointer" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="166.0" />
                </children>
             </HBox>

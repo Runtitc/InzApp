@@ -24,7 +24,7 @@ public class SnortLogICMPDetails {
         this.icmp_type = icmp_type;
         this.icmp_code = icmp_code;
         this.icmp_csum = icmp_csum;
-        this.icmp_id= icmp_id;
+        this.icmp_id = icmp_id;
         this.icmp_seq = icmp_seq;
     }
 
