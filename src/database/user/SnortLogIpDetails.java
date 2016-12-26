@@ -18,6 +18,7 @@ public class SnortLogIpDetails {
     private String ipSrcId;
     private String ipDestId;
     private String ipPayloadId;
+    private String ipPayloardAsciiId;
 
     public SnortLogIpDetails(){}
 
@@ -49,6 +50,18 @@ public class SnortLogIpDetails {
         this.ipSrcId = ipSrcId;
         this.ipDestId = ipDestId;
         this.ipPayloadId = ipPayloadId;
+        if (!ipPayloadId.isEmpty()) {
+            this.ipPayloardAsciiId = hexToAscii(ipPayloadId);
+        }
+    }
+
+    private String hexToAscii(String ipPayloadId) {
+        StringBuilder asciiOutput = new StringBuilder();
+        for (int i = 0; i < ipPayloadId.length(); i+=2) {
+            String str = ipPayloadId.substring(i, i+2);
+            asciiOutput.append((char)Integer.parseInt(str, 16));
+        }
+        return asciiOutput.toString();
     }
 
     public Integer getIpTtlId() {
@@ -101,5 +114,9 @@ public class SnortLogIpDetails {
 
     public String getIpPayloadId() {
         return ipPayloadId;
+    }
+
+    public String getIpPayloardAsciiId() {
+        return ipPayloardAsciiId;
     }
 }

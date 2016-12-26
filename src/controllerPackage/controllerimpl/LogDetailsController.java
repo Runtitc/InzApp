@@ -27,6 +27,7 @@ public class LogDetailsController {
     @FXML private Text ipSrcId;
     @FXML private Text ipDestId;
     @FXML private TextArea ipPayloadId;
+    @FXML private TextArea ipPayloadAsciiId;
 
     public void initialize(){
         CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
@@ -36,12 +37,12 @@ public class LogDetailsController {
         //ipProtocolVersion.setText("Ipv4");
     }
 
-    public void setCid(Integer cid){
+    public void setCid(Integer cid, boolean isData){
         this.cid = cid;
-        System.out.println(cid);
+        System.out.println("LogDetailsController: "+cid);
 
         SnortLogDaoImpl details = new SnortLogDaoImpl();
-        snortLogListSpecification = details.SelectLogIpSpecification(cid);
+        snortLogListSpecification = details.SelectLogIpSpecification(cid, isData);
 
         ipTtlId.setText(snortLogListSpecification.get(0).getIpTtlId().toString());
         ipOffId.setText(snortLogListSpecification.get(0).getIpOffId().toString());
@@ -56,6 +57,6 @@ public class LogDetailsController {
         ipSrcId.setText(snortLogListSpecification.get(0).getIpSrcId().toString());
         ipDestId.setText(snortLogListSpecification.get(0).getIpDestId().toString());
         ipPayloadId.setText(snortLogListSpecification.get(0).getIpPayloadId().toString());
-
+        ipPayloadAsciiId.setText((snortLogListSpecification.get(0).getIpPayloardAsciiId()));
     }
 }

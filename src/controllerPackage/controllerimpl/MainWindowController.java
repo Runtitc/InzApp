@@ -57,20 +57,28 @@ public class MainWindowController extends Controller{
     public void rowClicked() throws IOException {
         ObservableList<snortLog> singleRow;
         singleRow = mainWindowTable.getSelectionModel().getSelectedItems();
+
+        //use getters to fetch data from objects
         Integer selectedCid = singleRow.get(0).getMainWindowColumnCid();
+        String selectedProto = singleRow.get(0).getMainWindowColumnProt();
 
         if(singleRow.get(0) instanceof snortLog){
             //System.out.println(singleRow.get(0));
             System.out.println("SINGE" + selectedCid);
+            System.out.println("Proto" + selectedProto);
 
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/logdetails.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
-                stage.setTitle("Szczegóły alarmu");
+                stage.setTitle("Szczegóły alarmu, cid:"+ selectedCid);
 
                 LogDetailsController controller = loader.getController();
-                controller.setCid(selectedCid);
+                if (selectedProto.equals("TCP")){
+                    controller.setCid(selectedCid, false);
+                }else{
+                    controller.setCid(selectedCid, true);
+                }
 
                 stage.setScene(new Scene(root));
                 stage.show();

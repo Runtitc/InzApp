@@ -90,7 +90,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
         return snortLogsList;
     }
 
-    public ObservableList<SnortLogIpDetails> SelectLogIpSpecification(Integer selectedCid){
+    public ObservableList<SnortLogIpDetails> SelectLogIpSpecification(Integer selectedCid, boolean isData){
         snortLogListSpecification = FXCollections.observableArrayList();
         Connection conn = null;
         PreparedStatement q = null;
@@ -99,9 +99,24 @@ public class SnortLogDaoImpl implements SnortLogDao{
         try {
             conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
             // Without the account selection....
-            System.out.println(selectedCid);
-            q = conn.prepareStatement("" +
-                    "select " +
+            System.out.println("SnortLogDaoImpl: " + selectedCid);
+            SnortLogIpDetails selectedLog;
+            Integer ipTtlId =null;
+            Integer ipOffId =null;
+            Integer ipFlagId = null;
+            Integer ipHeaderLengthId = null;
+            Integer ipProtocol  = null;
+            Integer ipCheckSumId = null;
+            Integer ipTosId = null;
+            Integer ipSeqNumbId = null;
+            Integer ipLengthId = null;
+            Integer ipVersionId = null;
+            String ipSrcId = null;
+            String ipDestId = null;
+            String ipPayloadId = null;
+            if (isData) {
+                q = conn.prepareStatement("" +
+                        "select " +
                         "ip_ttl, " +
                         "ip_off, " +
                         "ip_flags, " +
@@ -115,33 +130,70 @@ public class SnortLogDaoImpl implements SnortLogDao{
                         "inet_ntoa(ip_src) AS ip_src, " +
                         "inet_ntoa(ip_dst) AS ip_dst, " +
                         "data_payload " +
-                    "FROM iphdr, data " +
-                    "WHERE " +
-                    "iphdr.cid=data.cid AND " +
-                    " iphdr.cid="+selectedCid    );
-            resultSet = q.executeQuery();
+                        "FROM iphdr, data " +
+                        "WHERE " +
+                        "iphdr.cid=data.cid AND " +
+                        " iphdr.cid=" + selectedCid);
+                resultSet = q.executeQuery();
 
-            while(resultSet.next()){
+                while(resultSet.next()) {
 
-                Integer ipTtlId = resultSet.getInt("ip_ttl");
-                Integer ipOffId = resultSet.getInt("ip_off");
-                Integer ipFlagId = resultSet.getInt("ip_flags");
-                Integer ipHeaderLengthId = resultSet.getInt("ip_hlen");
-                Integer IpProtocol= resultSet.getInt("ip_proto");
-                Integer ipCheckSumId = resultSet.getInt("ip_csum");
-                Integer ipTosId = resultSet.getInt("ip_tos");
-                Integer ipSeqNumbId = resultSet.getInt("ip_id");
-                Integer ipLengthId = resultSet.getInt("ip_len");
-                Integer ipVersionId = resultSet.getInt("ip_ver");
-                String ipSrcId = resultSet.getString("ip_src");
-                String ipDestId = resultSet.getString("ip_dst");
-                String ipPayloadId = resultSet.getString("data_payload");
+                    ipTtlId = resultSet.getInt("ip_ttl");
+                    ipOffId = resultSet.getInt("ip_off");
+                    ipFlagId = resultSet.getInt("ip_flags");
+                    ipHeaderLengthId = resultSet.getInt("ip_hlen");
+                    ipProtocol = resultSet.getInt("ip_proto");
+                    ipCheckSumId = resultSet.getInt("ip_csum");
+                    ipTosId = resultSet.getInt("ip_tos");
+                    ipSeqNumbId = resultSet.getInt("ip_id");
+                    ipLengthId = resultSet.getInt("ip_len");
+                    ipVersionId = resultSet.getInt("ip_ver");
+                    ipSrcId = resultSet.getString("ip_src");
+                    ipDestId = resultSet.getString("ip_dst");
+                    ipPayloadId = resultSet.getString("data_payload");
+                }
+                    selectedLog = new SnortLogIpDetails(
+                            ipTtlId, ipOffId, ipFlagId, ipHeaderLengthId, ipProtocol, ipCheckSumId, ipTosId, ipSeqNumbId, ipLengthId,
+                            ipVersionId, ipSrcId, ipDestId, ipPayloadId);
+            }else {
+                q = conn.prepareStatement("" +
+                        "select " +
+                        "ip_ttl, " +
+                        "ip_off, " +
+                        "ip_flags, " +
+                        "ip_hlen, " +
+                        "ip_proto, " +
+                        "ip_csum, " +
+                        "ip_tos, " +
+                        "ip_id, " +
+                        "ip_len," +
+                        "ip_ver, " +
+                        "inet_ntoa(ip_src) AS ip_src, " +
+                        "inet_ntoa(ip_dst) AS ip_dst " +
+                        "FROM iphdr WHERE iphdr.cid=" + selectedCid);
+                resultSet = q.executeQuery();
 
-                SnortLogIpDetails selectedLog = new SnortLogIpDetails(
-                        ipTtlId, ipOffId, ipFlagId, ipHeaderLengthId, IpProtocol, ipCheckSumId, ipTosId, ipSeqNumbId, ipLengthId,
-                        ipVersionId, ipSrcId, ipDestId, ipPayloadId);
-                snortLogListSpecification.add(selectedLog);
+
+                while (resultSet.next()) {
+
+                    ipTtlId = resultSet.getInt("ip_ttl");
+                    ipOffId = resultSet.getInt("ip_off");
+                    ipFlagId = resultSet.getInt("ip_flags");
+                    ipHeaderLengthId = resultSet.getInt("ip_hlen");
+                    ipProtocol = resultSet.getInt("ip_proto");
+                    ipCheckSumId = resultSet.getInt("ip_csum");
+                    ipTosId = resultSet.getInt("ip_tos");
+                    ipSeqNumbId = resultSet.getInt("ip_id");
+                    ipLengthId = resultSet.getInt("ip_len");
+                    ipVersionId = resultSet.getInt("ip_ver");
+                    ipSrcId = resultSet.getString("ip_src");
+                    ipDestId = resultSet.getString("ip_dst");
+                }
+                selectedLog = new SnortLogIpDetails(
+                        ipTtlId, ipOffId, ipFlagId, ipHeaderLengthId, ipProtocol, ipCheckSumId, ipTosId, ipSeqNumbId, ipLengthId,
+                        ipVersionId, ipSrcId, ipDestId, "");
             }
+            snortLogListSpecification.add(selectedLog);
             //System.out.println(snortLogSpecificationList.getClass());
         }catch(Exception e){
             e.printStackTrace();
