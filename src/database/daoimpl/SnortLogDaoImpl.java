@@ -1,8 +1,9 @@
 package database.daoimpl;
 
-import app.Dialog;
+import app.DialogPopUp;
 import database.config.CreateConnection;
 import database.dao.SnortLogDao;
+import database.user.SnortLogIpDetails;
 import database.user.snortLog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import java.util.Objects;
 public class SnortLogDaoImpl implements SnortLogDao{
 
     private ObservableList<snortLog> snortLogsList;
+    private ObservableList<SnortLogIpDetails> snortLogListSpecification;
 
     @Override
     public ObservableList<snortLog> selectLogs() {
@@ -28,7 +30,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
         ResultSet resultSet = null;
 
         try {
-            conn = CreateConnection.getConn(Dialog.getServerAddr(), Dialog.getDatabasePass());
+            conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
             // Without the account selection....
             q = conn.prepareStatement("" +
                     "SELECT " +
@@ -88,7 +90,89 @@ public class SnortLogDaoImpl implements SnortLogDao{
         return snortLogsList;
     }
 
-    //public ObservableList SelectIpSpecification()
+    public ObservableList<SnortLogIpDetails> SelectLogIpSpecification(Integer selectedCid){
+        snortLogListSpecification = FXCollections.observableArrayList();
+        Connection conn = null;
+        PreparedStatement q = null;
+        ResultSet resultSet = null;
+
+        try {
+            conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
+            // Without the account selection....
+            System.out.println(selectedCid);
+            q = conn.prepareStatement("" +
+                    "select " +
+                        "ip_ttl, " +
+                        "ip_off, " +
+                        "ip_flags, " +
+                        "ip_hlen, " +
+                        "ip_proto, " +
+                        "ip_csum, " +
+                        "ip_tos, " +
+                        "ip_id, " +
+                        "ip_len," +
+                        "ip_ver, " +
+                        "inet_ntoa(ip_src) AS ip_src, " +
+                        "inet_ntoa(ip_dst) AS ip_dst, " +
+                        "data_payload " +
+                    "FROM iphdr, data " +
+                    "WHERE " +
+                    "iphdr.cid=data.cid AND " +
+                    " iphdr.cid="+selectedCid    );
+            resultSet = q.executeQuery();
+
+            while(resultSet.next()){
+
+                Integer ipTtlId = resultSet.getInt("ip_ttl");
+                Integer ipOffId = resultSet.getInt("ip_off");
+                Integer ipFlagId = resultSet.getInt("ip_flags");
+                Integer ipHeaderLengthId = resultSet.getInt("ip_hlen");
+                Integer IpProtocol= resultSet.getInt("ip_proto");
+                Integer ipCheckSumId = resultSet.getInt("ip_csum");
+                Integer ipTosId = resultSet.getInt("ip_tos");
+                Integer ipSeqNumbId = resultSet.getInt("ip_id");
+                Integer ipLengthId = resultSet.getInt("ip_len");
+                Integer ipVersionId = resultSet.getInt("ip_ver");
+                String ipSrcId = resultSet.getString("ip_src");
+                String ipDestId = resultSet.getString("ip_dst");
+                String ipPayloadId = resultSet.getString("data_payload");
+
+                SnortLogIpDetails selectedLog = new SnortLogIpDetails(
+                        ipTtlId, ipOffId, ipFlagId, ipHeaderLengthId, IpProtocol, ipCheckSumId, ipTosId, ipSeqNumbId, ipLengthId,
+                        ipVersionId, ipSrcId, ipDestId, ipPayloadId);
+                snortLogListSpecification.add(selectedLog);
+            }
+            //System.out.println(snortLogSpecificationList.getClass());
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            if ( null != resultSet ){
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != q ){
+                try {
+                    q.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if ( null != conn){
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return snortLogListSpecification;
+
+    }
 
     private String convertToName(String ip_proto) {
         if (Objects.equals(ip_proto, "1")) return "ICMP";

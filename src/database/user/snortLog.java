@@ -20,6 +20,7 @@ public class snortLog {
 
     }
 
+
     public snortLog(
             Integer cid,
             String sigName,

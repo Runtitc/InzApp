@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllerPackage.controllerimpl.LogDetailsController">
+   <top>
+      <VBox prefHeight="41.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <VBox prefHeight="359.0" prefWidth="57.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="4.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wersja protokołu IP:" wrappingWidth="227.0166015625" />
+                  <Text fx:id="ipVersionId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="78.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dlugosc nagłówka:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipHeaderLengthId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Całkowita dlugosc pakietu:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipLengthId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ usługi:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipTosId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numer identyfikacjny:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipSeqNumbId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flagi:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipFlagId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Przesunięcie:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipOffId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Czas życia: " wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipTtlId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Protokół warstwy wyższej :" wrappingWidth="225.0166015625" />
+                  <Text fx:id="IpProtocol" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suma kontrolna nagłówka:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipCheckSumId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adres źródłowy:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipSrcId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="9.0" prefWidth="543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adres docelowy:" wrappingWidth="225.0166015625" />
+                  <Text fx:id="ipDestId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="113.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="127.0" prefWidth="119.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Payload Danych:" wrappingWidth="501.28271484375" />
+                        <TextArea fx:id="ipPayloadId" prefHeight="113.0" prefWidth="436.0" wrapText="true" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

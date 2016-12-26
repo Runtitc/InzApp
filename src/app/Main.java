@@ -16,10 +16,10 @@ public class Main extends Application {
     public void enterServerAddress(Stage primaryStage) throws Exception {
 
         while (true) {
-            Dialog serverAddressInput = new Dialog();
+            DialogPopUp serverAddressInput = new DialogPopUp();
             serverAddressInput.createDialog();
 
-            if (Dialog.validateConn(Dialog.getServerAddr(), Dialog.getDatabasePass())) {
+            if (DialogPopUp.validateConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass())) {
                 break;
 
             } else {

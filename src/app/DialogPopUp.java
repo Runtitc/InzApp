@@ -13,15 +13,15 @@ import java.util.Optional;
 /**
  * Created by runtitc on 23.12.16.
  */
-public class Dialog {
+public class DialogPopUp {
     private  static String serverAddr;
     private  static String databasePass;
     public boolean validation;
-    public Dialog(){}
+    public DialogPopUp(){}
 
     public void createDialog(){
 
-        javafx.scene.control.Dialog<Pair<String, String>> dialog = new javafx.scene.control.Dialog<>();
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Połącz z serwerem");
         dialog.setHeaderText("Wpisz proszę adres IP serwera oraz hasło do bazy.");
 
@@ -50,7 +50,8 @@ public class Dialog {
 
         dialog.setResultConverter(chosenButton -> {
             if (chosenButton== loginButtonT){
-                return new Pair<>(serverAddress.getText(), passServer.getText());
+                //return new Pair<>(serverAddress.getText(), passServer.getText()); AUTOMATYZACJA
+                return new Pair<>("192.168.180.129", "snortpass");
             }
             if (chosenButton == cancelButtonT){
                 System.exit(0);
@@ -66,9 +67,7 @@ public class Dialog {
         });
     }
 
-    public void createPopUp(){
 
-    }
 
     public static boolean validateConn(String serverAddr, String databasePass){
         Connection conn = null;

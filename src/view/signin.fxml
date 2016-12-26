@@ -17,7 +17,7 @@
                         <Insets top="5.0" />
                      </HBox.margin>
                   </Text>
-                  <TextField fx:id="loginUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="363.0" promptText="Login" />
+                  <TextField fx:id="loginUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="363.0" promptText="Login" text="123"/>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -27,7 +27,7 @@
                         <Insets right="3.0" top="5.0" />
                      </HBox.margin>
                   </Text>
-                  <PasswordField fx:id="passwordUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="359.0" promptText="Hasło" />
+                  <PasswordField fx:id="passwordUsername" onAction="#onEventOccured" prefHeight="25.0" prefWidth="359.0" promptText="Hasło" text="12345678" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
