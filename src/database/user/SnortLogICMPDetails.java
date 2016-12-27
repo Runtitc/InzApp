@@ -6,7 +6,7 @@ package database.user;
 public class SnortLogICMPDetails {
 
     //ICMP
-    private Integer icmp_type;
+    private String icmp_type;
     private Integer icmp_code;
     private Integer icmp_csum;
     private Integer icmp_id;
@@ -15,7 +15,7 @@ public class SnortLogICMPDetails {
     public SnortLogICMPDetails(){}
 
     public SnortLogICMPDetails(
-            Integer icmp_type,
+            String icmp_type,
             Integer icmp_code,
             Integer icmp_csum,
             Integer icmp_id,
@@ -29,7 +29,7 @@ public class SnortLogICMPDetails {
     }
 
 
-    public Integer getIcmp_type() {
+    public String getIcmp_type() {
         return icmp_type;
     }
 

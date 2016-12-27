@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -92,7 +94,11 @@ public class SnortLogDaoImpl implements SnortLogDao{
         SnortLogIpDetails selectedIpHeader = null;
         Connection conn = null;
         PreparedStatement q = null;
+        PreparedStatement testingForPayload = null;
         ResultSet resultSet = null;
+        ResultSet resultSetForPayloadTesting = null;
+        String returnedPayload = null;
+
         Integer ipTtlId =null;
         Integer ipOffId =null;
         Integer ipFlagId = null;
@@ -109,8 +115,18 @@ public class SnortLogDaoImpl implements SnortLogDao{
         try {
             conn = CreateConnection.getConn(DialogPopUp.getServerAddr(), DialogPopUp.getDatabasePass());
             // Without the account selection....
+            testingForPayload = conn.prepareStatement("Select data_payload FROM iphdr, data WHERE iphdr.cid=data.cid AND data.cid = ?");
+            testingForPayload.setString(1, selectedCid.toString());
+            resultSetForPayloadTesting = testingForPayload.executeQuery();
+            while (resultSetForPayloadTesting.next()){
+                returnedPayload = resultSetForPayloadTesting.getString("data_payload");
+            }
+            if (null == returnedPayload){
+                returnedPayload = "Pusty Payload";
+            }
+            System.out.println(returnedPayload);
+            //if (!protocol.equals("TCP")) {
 
-            if (!protocol.equals("TCP")) {
                 q = conn.prepareStatement("" +
                         "select " +
                             "ip_ttl, " +
@@ -124,15 +140,13 @@ public class SnortLogDaoImpl implements SnortLogDao{
                             "ip_len," +
                             "ip_ver, " +
                             "inet_ntoa(ip_src) AS ip_src, " +
-                            "inet_ntoa(ip_dst) AS ip_dst, " +
-                            "data_payload " +
-                        "FROM iphdr, data " +
-                        "WHERE " +
-                            "iphdr.cid=data.cid AND " +
-                            "iphdr.cid= ?" );
+                            "inet_ntoa(ip_dst) AS ip_dst " +
+                        "FROM iphdr " +
+                        "WHERE cid = ?" );
                 q.setString(1, selectedCid.toString());
                 resultSet = q.executeQuery();
 
+                Integer licnzik=0;
                 while(resultSet.next()) {
 
                     ipTtlId = resultSet.getInt("ip_ttl");
@@ -147,12 +161,15 @@ public class SnortLogDaoImpl implements SnortLogDao{
                     ipVersionId = resultSet.getInt("ip_ver");
                     ipSrcId = resultSet.getString("ip_src");
                     ipDestId = resultSet.getString("ip_dst");
-                    ipPayloadId = resultSet.getString("data_payload");
+                    //ipPayloadId = resultSet.getString("data_payload");
+                    licnzik++;
                 }
+                System.out.println(licnzik);
+
                     selectedIpHeader = new SnortLogIpDetails(
                             ipTtlId, ipOffId, ipFlagId, ipHeaderLengthId, ipProtocol, ipCheckSumId, ipTosId, ipSeqNumbId, ipLengthId,
-                            ipVersionId, ipSrcId, ipDestId, ipPayloadId);
-            }else {
+                            ipVersionId, ipSrcId, ipDestId, returnedPayload);
+            /*}else {
                 q = conn.prepareStatement("" +
                         "select " +
                             "ip_ttl, " +
@@ -189,7 +206,9 @@ public class SnortLogDaoImpl implements SnortLogDao{
                 selectedIpHeader = new SnortLogIpDetails(
                         ipTtlId, ipOffId, ipFlagId, ipHeaderLengthId, ipProtocol, ipCheckSumId, ipTosId, ipSeqNumbId, ipLengthId,
                         ipVersionId, ipSrcId, ipDestId, "");
+
             }
+            */
         }catch(Exception e){
             e.printStackTrace();
         }finally {
@@ -360,7 +379,6 @@ public class SnortLogDaoImpl implements SnortLogDao{
                 }
             }
         }
-        //System.out.println(selectedUdpHeader.getUdp_csum());
         return selectedUdpHeader;
     }
 
@@ -370,7 +388,7 @@ public class SnortLogDaoImpl implements SnortLogDao{
         PreparedStatement q = null;
         ResultSet resultSet = null;
 
-        Integer icmp_type = null;
+        String icmp_type = null;
         Integer icmp_code = null;
         Integer icmp_csum = null;
         Integer icmp_id = null;
@@ -391,7 +409,8 @@ public class SnortLogDaoImpl implements SnortLogDao{
             resultSet = q.executeQuery();
 
             while (resultSet.next()) {
-                icmp_type = resultSet.getInt("icmp_type");
+
+                icmp_type = convertICMPTypeToName(resultSet.getString("icmp_type"))+"("+resultSet.getString("icmp_type")+")";
                 icmp_code = resultSet.getInt("icmp_code");
                 icmp_csum = resultSet.getInt("icmp_csum");
                 icmp_id = resultSet.getInt("icmp_id");
@@ -429,10 +448,52 @@ public class SnortLogDaoImpl implements SnortLogDao{
 
         return selectedIcmpHeader;
     }
-    private String convertToName(String ip_proto) {
-        if (Objects.equals(ip_proto, "1")) return "ICMP";
-        if (Objects.equals(ip_proto, "6")) return "TCP";
-        if (Objects.equals(ip_proto, "17")) return "UDP";
-        return ip_proto;
+    private String convertToName(String ipProtocol) {
+        if (Objects.equals(ipProtocol, "1")) return "ICMP";
+        if (Objects.equals(ipProtocol, "6")) return "TCP";
+        if (Objects.equals(ipProtocol, "17")) return "UDP";
+        return ipProtocol;
+    }
+
+    private String convertICMPTypeToName(String icmpType){
+        Map<Integer, String> icmpTypes = new HashMap<Integer, String>();
+        icmpTypes.put(0, "Echo Reply");
+        icmpTypes.put(1, "Reserved");
+        icmpTypes.put(2, "Reserved");
+        icmpTypes.put(3, "Destination Unreachable");
+        icmpTypes.put(6, "Alternate Host Address");
+        icmpTypes.put(7, "Reserved");
+        icmpTypes.put(8, "Echo Request");
+        icmpTypes.put(9, "Router Advertisement");
+        icmpTypes.put(10, "Router Solicitation");
+        icmpTypes.put(11, "Time Exceeded");
+        icmpTypes.put(12, "Parameter Problem");
+        icmpTypes.put(13, "Timestamp");
+        icmpTypes.put(14, "Timestamp Reply");
+        icmpTypes.put(15, "Information Request");
+        icmpTypes.put(16, "Information Reply");
+        icmpTypes.put(17, "Address Mask Request");
+        icmpTypes.put(18, "Address Mask Reply");
+        icmpTypes.put(19, "Security Reservation");
+        for ( int j = 20; j<30; j++){
+            icmpTypes.put(j,"Reserved");
+        }
+        icmpTypes.put(19, "Security Reservation");
+        icmpTypes.put(30, "Traceroute");
+        icmpTypes.put(31, "Datagram Conversion Error");
+        icmpTypes.put(32, "Mobile Host Redirect");
+        icmpTypes.put(33, "IPv6 Where-Are-You");
+        icmpTypes.put(34, "IPv6 Here-I-Am");
+        icmpTypes.put(35, "Mobile Registration Request");
+        icmpTypes.put(36, "Mobile Registration Reply");
+        icmpTypes.put(37, "Domain Name Request");
+        icmpTypes.put(38, "Domain Name Reply");
+
+        for (Map.Entry<Integer, String> entry : icmpTypes.entrySet()){
+            if (Objects.equals(Integer.parseInt(icmpType), entry.getKey())){
+                return entry.getValue();
+            }
+        }
+        return icmpType;
     }
 }

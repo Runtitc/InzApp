@@ -52,7 +52,9 @@ public class SnortLogIpDetails {
         this.ipSrcId = ipSrcId;
         this.ipDestId = ipDestId;
         this.ipPayloadId = ipPayloadId;
-        if (!ipPayloadId.isEmpty()) {
+        if (ipPayloadId.equals("Pusty Payload")) {
+            this.ipPayloardAsciiId = "Pusty Payload";
+        }else if (!ipPayloadId.isEmpty()){
             this.ipPayloardAsciiId = hexToAscii(ipPayloadId);
         }
     }
