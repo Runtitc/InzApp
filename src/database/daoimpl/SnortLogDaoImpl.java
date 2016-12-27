@@ -248,8 +248,8 @@ public class SnortLogDaoImpl implements SnortLogDao{
 
         Integer tcp_sport = null;
         Integer tcp_dport = null;
-        Integer tcp_seq = null;
-        Integer tcp_ack = null;
+        String tcp_seq = null;
+        String tcp_ack = null;
         Integer tcp_off = null;
         Integer tcp_res = null;
         Integer tcp_flags = null;
@@ -278,8 +278,8 @@ public class SnortLogDaoImpl implements SnortLogDao{
             while (resultSet.next()) {
                 tcp_sport = resultSet.getInt("tcp_sport");
                 tcp_dport = resultSet.getInt("tcp_dport");
-                tcp_seq = resultSet.getInt("tcp_seq");
-                tcp_ack = resultSet.getInt("tcp_ack");
+                tcp_seq = resultSet.getString("tcp_seq");
+                tcp_ack = resultSet.getString("tcp_ack");
                 tcp_off = resultSet.getInt("tcp_off");
                 tcp_res = resultSet.getInt("tcp_res");
                 tcp_flags = resultSet.getInt("tcp_flags");

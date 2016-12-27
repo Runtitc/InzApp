@@ -8,8 +8,8 @@ public class SnortLogTCPDetails {
     //TCP
     private Integer tcpSport;
     private Integer tcpDport;
-    private Integer tcpSeq;
-    private Integer tcpAck;
+    private String tcpSeq;
+    private String tcpAck;
     private Integer tcpOff;
     private Integer tcpRes;
     private Integer tcpFlags;
@@ -22,8 +22,8 @@ public class SnortLogTCPDetails {
     public SnortLogTCPDetails(
             Integer tcpSport,
             Integer tcpDport,
-            Integer tcpSeq,
-            Integer tcpAck,
+            String tcpSeq,
+            String tcpAck,
             Integer tcpOff,
             Integer tcpRes,
             Integer tcpFlags,
@@ -51,11 +51,11 @@ public class SnortLogTCPDetails {
         return tcpDport;
     }
 
-    public Integer getTcpSeq() {
+    public String getTcpSeq() {
         return tcpSeq;
     }
 
-    public Integer getTcpAck() {
+    public String getTcpAck() {
         return tcpAck;
     }
 
