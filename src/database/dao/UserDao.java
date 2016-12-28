@@ -1,6 +1,6 @@
 package database.dao;
 
-import database.user.User;
+import database.objectDetails.User;
 
 /**
  * Created by runtitc on 10/25/16.

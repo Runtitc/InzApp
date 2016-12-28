@@ -4,7 +4,7 @@ import app.DialogPopUp;
 import controllerPackage.controller.Controller;
 import database.config.CreateConnection;
 import database.daoimpl.SnortLogDaoImpl;
-import database.user.SnortLogUDPDetails;
+import database.objectDetails.SnortLogUDPDetails;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 

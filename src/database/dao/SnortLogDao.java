@@ -1,6 +1,6 @@
 package database.dao;
 
-import database.user.snortLog;
+import database.objectDetails.snortLog;
 import javafx.collections.ObservableList;
 
 /**

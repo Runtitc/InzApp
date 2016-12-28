@@ -3,7 +3,7 @@ package controllerPackage.controllerimpl;
 import app.AlertBox;
 import controllerPackage.controller.Controller;
 import database.daoimpl.UserDaoImpl;
-import database.user.User;
+import database.objectDetails.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -46,11 +46,11 @@ public class SignInController extends Controller{
     }
 
     public boolean validateUser(String loginUsername, String pass){
-        //select the data from the db and insert it into the object 'user'
+        //select the data from the db and insert it into the object Uuser'
         UserDaoImpl udi = new UserDaoImpl();
         User user = udi.selectByUsername(loginUsername);
 
-        //if the user input the wrong credentials, then the proper alert will display.
+        //if the User input the wrong credentials, then the proper alert will display.
         // Null Condition is necessary to mitigate the stacktrace's when comparing Surname to Null objects
         if (null != user.getUsername()){
             if (user.getUsername().equals(loginUsername)){

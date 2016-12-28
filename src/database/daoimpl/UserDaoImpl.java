@@ -3,7 +3,7 @@ package database.daoimpl;
 import app.DialogPopUp;
 import database.config.CreateConnection;
 import database.dao.UserDao;
-import database.user.User;
+import database.objectDetails.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,7 +63,6 @@ public class UserDaoImpl implements UserDao{
             resultSet = q.executeQuery();
 
             while (resultSet.next()){
-                //user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getString("Username"));
                 user.setPassword(resultSet.getString("Password"));
             }

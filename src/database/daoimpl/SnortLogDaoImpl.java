@@ -3,7 +3,7 @@ package database.daoimpl;
 import app.DialogPopUp;
 import database.config.CreateConnection;
 import database.dao.SnortLogDao;
-import database.user.*;
+import database.objectDetails.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

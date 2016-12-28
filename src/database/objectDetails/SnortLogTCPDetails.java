@@ -1,4 +1,4 @@
-package database.user;
+package database.objectDetails;
 
 /**
  * Created by runtitc on 12/25/16.

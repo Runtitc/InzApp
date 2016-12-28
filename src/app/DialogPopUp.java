@@ -3,7 +3,6 @@ package app;
 import database.config.CreateConnection;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 
@@ -25,7 +24,7 @@ public class DialogPopUp {
         dialog.setTitle("Połącz z serwerem");
         dialog.setHeaderText("Wpisz proszę adres IP serwera oraz hasło do bazy.");
 
-        dialog.setGraphic(new ImageView((this.getClass().getResource("../icons/serverKey.png").toString())));
+        //dialog.setGraphic(new ImageView((this.getClass().getResource("../icons/serverKey.png").toString())));
 
         ButtonType loginButtonT = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelButtonT = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -50,8 +49,8 @@ public class DialogPopUp {
 
         dialog.setResultConverter(chosenButton -> {
             if (chosenButton== loginButtonT){
-                //return new Pair<>(serverAddress.getText(), passServer.getText()); AUTOMATYZACJA
-                return new Pair<>("192.168.180.129", "snortpass");
+                return new Pair<>(serverAddress.getText(), passServer.getText()); //AUTOMATYZACJA
+                //return new Pair<>("192.168.180.129", "snortpass");
             }
             if (chosenButton == cancelButtonT){
                 System.exit(0);

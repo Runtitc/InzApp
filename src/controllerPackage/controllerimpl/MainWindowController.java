@@ -5,7 +5,7 @@ import app.DialogPopUp;
 import controllerPackage.controller.Controller;
 import database.config.CreateConnection;
 import database.daoimpl.SnortLogDaoImpl;
-import database.user.snortLog;
+import database.objectDetails.snortLog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,7 +57,7 @@ public class MainWindowController extends Controller{
     public void rowClicked() throws IOException {
         ObservableList<snortLog> singleRow;
         singleRow = mainWindowTable.getSelectionModel().getSelectedItems();
-
+        System.out.println(singleRow.get(0));
         if(singleRow.get(0) != null){
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/logdetails.fxml"));

@@ -14,9 +14,7 @@ public class AlertBox {
         this.typeOfAlert = type;
         this.additionalInformation = additionalInformation;
 
-        if (type.equals("noSnortDetected")){
-            noSnortDetectedAlert(additionalInformation);
-        } else if (type.equals("registrationErr")){
+        if (type.equals("registrationErr")){
             registrationError(additionalInformation);
         } else if (type.equals("makingConnErr")){
             makingConnErr(additionalInformation);
@@ -83,13 +81,6 @@ public class AlertBox {
         Alert logErrAlert = createErrAlert(title, headerText, contentText);
     }
 
-    private void noSnortDetectedAlert(String additionalInformation) {
-        String title = "Uwaga";
-        String headerText = "Nie wykryto instalacji aplikacji Snort!";
-        String contentText = "Proszę zainstalować aplikację Snort.";
-
-        Alert noSnortAlert = createConfirmationAlert(title, headerText, contentText);
-    }
     private Alert createErrAlert(String title, String headerText, String contentText){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         setAlertContent(alert, title, headerText, contentText);

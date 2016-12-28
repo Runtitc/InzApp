@@ -5,7 +5,7 @@ import app.DialogPopUp;
 import controllerPackage.controller.Controller;
 import database.config.CreateConnection;
 import database.daoimpl.SnortLogDaoImpl;
-import database.user.SnortLogIpDetails;
+import database.objectDetails.SnortLogIpDetails;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

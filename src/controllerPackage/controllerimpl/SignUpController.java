@@ -3,7 +3,7 @@ package controllerPackage.controllerimpl;
 import app.AlertBox;
 import controllerPackage.controller.Controller;
 import database.daoimpl.UserDaoImpl;
-import database.user.User;
+import database.objectDetails.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
